@@ -48,8 +48,7 @@ public class ProtobufScheme extends SequenceFile {
   @Override
   public boolean source(FlowProcess<JobConf> flowProcess,
       SourceCall<Object[], RecordReader> sourceCall) throws IOException {
-    //Object key = sourceCall.getContext()[0];
-    //Object value = sourceCall.getContext()[1];
+    // TODO: cache this BytesWritable in the context
     BytesWritable value = new BytesWritable();
     boolean result = sourceCall.getInput().next(NullWritable.get(), value);
 
@@ -90,6 +89,7 @@ public class ProtobufScheme extends SequenceFile {
     Message message = (Message)tupleEntry.getObject(fieldName);
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
     message.writeTo(baos);
+    // TODO: cache this BytesWritable
     BytesWritable outputWritable = new BytesWritable(baos.toByteArray());
 
     sinkCall.getOutput().collect(NullWritable.get(), outputWritable);
