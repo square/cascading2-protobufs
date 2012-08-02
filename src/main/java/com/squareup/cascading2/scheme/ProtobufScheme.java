@@ -20,6 +20,10 @@ import org.apache.hadoop.mapred.OutputCollector;
 import org.apache.hadoop.mapred.RecordReader;
 import org.apache.hadoop.mapred.SequenceFileOutputFormat;
 
+/**
+ * A Scheme that allows reading from and writing to Hadoop SequenceFiles that use NullWritable keys
+ * and Protocol Buffers serialized objects wrapped in BytesWritable values.
+ */
 public class ProtobufScheme extends SequenceFile {
 
   private transient Message.Builder prototype;

@@ -25,7 +25,6 @@ import org.apache.hadoop.fs.Path;
 public class TestProtobufScheme extends TestCase {
   public void testRoundtrip() throws Exception {
     FileSystem.get(new Configuration()).delete(new Path("/tmp/input"), true);
-    FileSystem.get(new Configuration()).delete(new Path("/tmp/output"), true);
 
     // write some fake data
     List<Tuple> expected = new ArrayList<Tuple>();

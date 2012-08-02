@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f2053845-28c8-42e5-8629-8f1afd69196d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/squareup/cascading2/scheme/ProtobufScheme.java" afterPath="$PROJECT_DIR$/src/main/java/com/squareup/cascading2/scheme/ProtobufScheme.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/squareup/cascading2/scheme/TestProtobufScheme.java" afterPath="$PROJECT_DIR$/src/test/java/com/squareup/cascading2/scheme/TestProtobufScheme.java" />
     </list>
     <ignored path="cascading2-protobufs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,7 +64,7 @@
       <file leaf-file-name="ProtobufScheme.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/squareup/cascading2/scheme/ProtobufScheme.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="103" column="4" selection-start="3530" selection-end="3555" vertical-scroll-proportion="0.9108204">
+            <state line="26" column="0" selection-start="780" selection-end="964" vertical-scroll-proportion="0.12485137">
               <folding />
             </state>
           </provider>
@@ -72,39 +73,12 @@
       <file leaf-file-name="TestProtobufScheme.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/com/squareup/cascading2/scheme/TestProtobufScheme.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="0" selection-start="2019" selection-end="2019" vertical-scroll-proportion="0.0">
+            <state line="26" column="77" selection-start="975" selection-end="975" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1124#1131#0" expanded="true" />
-                <element signature="e#1846#1853#0" expanded="true" />
+                <element signature="e#1045#1052#0" expanded="true" />
+                <element signature="e#1767#1774#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="example.proto" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/example.proto">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="1" selection-start="144" selection-end="144" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Example.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/com/squareup/cascading2/generated/Example.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="32" selection-start="493" selection-end="493" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Message.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/2.4.1/protobuf-java-2.4.1.jar!/com/google/protobuf/Message.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="88" selection-start="1110" selection-end="1110" vertical-scroll-proportion="-8.313725">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -619,13 +593,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="19" selection-start="2895" selection-end="2895" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/example.proto">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="1" selection-start="144" selection-end="144" vertical-scroll-proportion="0.0">
@@ -656,25 +623,32 @@
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/2.4.1/protobuf-java-2.4.1.jar!/com/google/protobuf/Message.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="88" selection-start="1110" selection-end="1110" vertical-scroll-proportion="-8.313725">
+        <state line="31" column="88" selection-start="1110" selection-end="1110" vertical-scroll-proportion="0.53670883">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/com/squareup/cascading2/scheme/TestProtobufScheme.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="0" selection-start="2019" selection-end="2019" vertical-scroll-proportion="0.0">
+        <state line="26" column="77" selection-start="975" selection-end="975" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1124#1131#0" expanded="true" />
-            <element signature="e#1846#1853#0" expanded="true" />
+            <element signature="e#1045#1052#0" expanded="true" />
+            <element signature="e#1767#1774#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="81" column="19" selection-start="2895" selection-end="2895" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/squareup/cascading2/scheme/ProtobufScheme.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="103" column="4" selection-start="3530" selection-end="3555" vertical-scroll-proportion="0.9108204">
+        <state line="26" column="0" selection-start="780" selection-end="964" vertical-scroll-proportion="0.12485137">
           <folding />
         </state>
       </provider>
