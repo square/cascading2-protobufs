@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: cascading:cascading-hadoop:2.0.4-wip-335">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/cascading/cascading-hadoop/2.0.4-wip-335/cascading-hadoop-2.0.4-wip-335.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/cascading/cascading-hadoop/2.0.4-wip-335/cascading-hadoop-2.0.4-wip-335-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/cascading/cascading-hadoop/2.0.4-wip-335/cascading-hadoop-2.0.4-wip-335-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
