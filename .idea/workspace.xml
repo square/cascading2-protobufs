@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f2053845-28c8-42e5-8629-8f1afd69196d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/squareup/cascading2/scheme/ProtobufScheme.java" afterPath="$PROJECT_DIR$/src/main/java/com/squareup/cascading2/scheme/ProtobufScheme.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/com/squareup/cascading2/scheme/TestProtobufScheme.java" afterPath="$PROJECT_DIR$/src/test/java/com/squareup/cascading2/scheme/TestProtobufScheme.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cascading2-protobufs.iml" afterPath="$PROJECT_DIR$/cascading2-protobufs.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="cascading2-protobufs.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -61,10 +62,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ProtobufScheme.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ProtobufScheme.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/squareup/cascading2/scheme/ProtobufScheme.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="26" column="0" selection-start="780" selection-end="964" vertical-scroll-proportion="0.12485137">
+            <state line="44" column="70" selection-start="1609" selection-end="1609" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -83,10 +84,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="pom.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="81" column="19" selection-start="2895" selection-end="2895" vertical-scroll-proportion="0.0">
+            <state line="39" column="37" selection-start="1628" selection-end="1628" vertical-scroll-proportion="0.5184304">
               <folding />
             </state>
           </provider>
@@ -105,11 +106,11 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/example.proto" />
         <option value="$PROJECT_DIR$/src/test/java/com/squareup/cascading2/generated/Example.java" />
         <option value="$PROJECT_DIR$/src/test/java/com/squareup/cascading2/scheme/TestProtobufScheme.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/squareup/cascading2/scheme/ProtobufScheme.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -510,7 +511,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="2" y="22" width="2560" height="1414" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -639,16 +640,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/squareup/cascading2/scheme/ProtobufScheme.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="19" selection-start="2895" selection-end="2895" vertical-scroll-proportion="0.0">
+        <state line="44" column="70" selection-start="1609" selection-end="1609" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/squareup/cascading2/scheme/ProtobufScheme.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="780" selection-end="964" vertical-scroll-proportion="0.12485137">
+        <state line="39" column="37" selection-start="1628" selection-end="1628" vertical-scroll-proportion="0.5184304">
           <folding />
         </state>
       </provider>
