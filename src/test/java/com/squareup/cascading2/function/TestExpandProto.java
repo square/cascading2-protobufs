@@ -17,6 +17,7 @@ import com.squareup.cascading2.generated.Example;
 import com.squareup.cascading2.scheme.ProtobufScheme;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import junit.framework.TestCase;
@@ -92,7 +93,9 @@ public class TestExpandProto extends TestCase {
     while (iter.hasNext()) {
       results.add(iter.next().getTupleCopy());
     }
-    assertEquals(Collections.singletonList(new Tuple(BRYAN.build())), results);
+    assertEquals(1, results.size());
+
+    assertEquals(new Tuple(0, 1, "bryan", "bryan@mail.com").toString(), results.get(0).toString());
   }
 
   private static List<Tuple> operateFunction(Function func, final TupleEntry argument) {
