@@ -9,10 +9,9 @@ import cascading.tuple.Fields;
 import cascading.tuple.Tuple;
 import cascading.tuple.TupleEntry;
 import com.google.protobuf.Message;
+import com.squareup.cascading2.util.Util;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import org.apache.hadoop.io.BytesWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.mapred.JobConf;
@@ -25,15 +24,14 @@ import org.apache.hadoop.mapred.SequenceFileOutputFormat;
  * and Protocol Buffers serialized objects wrapped in BytesWritable values.
  */
 public class ProtobufScheme extends SequenceFile {
-
   private transient Message.Builder prototype;
   private final String fieldName;
   private final String messageClassName;
 
-  public ProtobufScheme(String fieldName, Class<? extends Message> prototype) {
+  public ProtobufScheme(String fieldName, Class<? extends Message> messageClass) {
     super(new Fields(fieldName));
     this.fieldName = fieldName;
-    messageClassName = prototype.getName();
+    messageClassName = messageClass.getName();
   }
 
   @Override public void sourcePrepare(FlowProcess<JobConf> flowProcess,
@@ -68,19 +66,7 @@ public class ProtobufScheme extends SequenceFile {
 
   private Message.Builder getPrototype() {
     if (prototype == null) {
-      try {
-        Class<Message> messageClass = (Class<Message>) Class.forName(messageClassName);
-        Method m = messageClass.getMethod("newBuilder");
-        prototype = (Message.Builder) m.invoke(new Object[]{});
-      } catch (IllegalAccessException e) {
-        throw new RuntimeException(e);
-      } catch (ClassNotFoundException e) {
-        throw new RuntimeException(e);
-      } catch (NoSuchMethodException e) {
-        throw new RuntimeException(e);
-      } catch (InvocationTargetException e) {
-        throw new RuntimeException(e);
-      }
+      prototype = Util.builderFromMessageClass(messageClassName);
     }
     return prototype;
   }
