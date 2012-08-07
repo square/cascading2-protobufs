@@ -70,7 +70,33 @@ public class TestExpandProto extends TestCase {
   }
 
   public void testConstructorErrorCases() throws Exception {
-    fail();
+    try {
+      new ExpandProto<Example.Person>(null);
+      fail("should throw NPE on null message class");
+    } catch(NullPointerException e) {
+      // ok
+    }
+
+    try {
+      new ExpandProto<Example.Person>(Example.Person.class, new Fields("1"));
+      fail("should throw exception with non-found field");
+    } catch(IllegalArgumentException e) {
+      // ok
+    }
+
+    try {
+      new ExpandProto<Example.Person>(Example.Person.class, "1");
+      fail("should throw exception with non-found field");
+    } catch(IllegalArgumentException e) {
+      // ok
+    }
+
+    try {
+      new ExpandProto<Example.Person>(Example.Person.class, new Fields("1"), "id", "name");
+      fail("should throw exception with arg length mismatch");
+    } catch(IllegalArgumentException e) {
+      // ok
+    }
   }
 
   public void testInFlow() throws Exception {

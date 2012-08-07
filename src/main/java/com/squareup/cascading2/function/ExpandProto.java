@@ -67,6 +67,27 @@ public class ExpandProto<T extends Message> extends BaseOperation implements Fun
    */
   public ExpandProto(Class<T> messageClass, Fields fieldDeclaration, String... fieldsToExtract) {
     super(1, fieldDeclaration);
+    if (fieldDeclaration.size() != fieldsToExtract.length) {
+      throw new IllegalArgumentException("Fields "
+          + fieldDeclaration
+          + " doesn't have enough field names to identify all "
+          + fieldsToExtract.length
+          + " fields in "
+          + messageClass.getName());
+    }
+
+    Message.Builder builder = Util.builderFromMessageClass(messageClass.getName());
+
+    List <Descriptors.FieldDescriptor> fieldDescriptors = new ArrayList<Descriptors.FieldDescriptor>();
+    for (int i = 0; i < fieldsToExtract.length; i++) {
+      if (builder.getDescriptorForType().findFieldByName(fieldsToExtract[i]) == null) {
+        throw new IllegalArgumentException("Could not find a field named '"
+            + fieldsToExtract[i]
+            + "' in message class "
+            + messageClass.getName());
+      }
+    }
+
     this.fieldsToExtract = fieldsToExtract;
     this.messageClassName = messageClass.getName();
   }
