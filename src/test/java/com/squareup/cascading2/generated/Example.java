@@ -550,11 +550,615 @@ public final class Example {
     // @@protoc_insertion_point(class_scope:com.squareup.cascading2.generated.Person)
   }
   
+  public interface PartnershipOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // required .com.squareup.cascading2.generated.Person leader = 1;
+    boolean hasLeader();
+    com.squareup.cascading2.generated.Example.Person getLeader();
+    com.squareup.cascading2.generated.Example.PersonOrBuilder getLeaderOrBuilder();
+    
+    // required .com.squareup.cascading2.generated.Person follower = 2;
+    boolean hasFollower();
+    com.squareup.cascading2.generated.Example.Person getFollower();
+    com.squareup.cascading2.generated.Example.PersonOrBuilder getFollowerOrBuilder();
+  }
+  public static final class Partnership extends
+      com.google.protobuf.GeneratedMessage
+      implements PartnershipOrBuilder {
+    // Use Partnership.newBuilder() to construct.
+    private Partnership(Builder builder) {
+      super(builder);
+    }
+    private Partnership(boolean noInit) {}
+    
+    private static final Partnership defaultInstance;
+    public static Partnership getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public Partnership getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Partnership_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Partnership_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // required .com.squareup.cascading2.generated.Person leader = 1;
+    public static final int LEADER_FIELD_NUMBER = 1;
+    private com.squareup.cascading2.generated.Example.Person leader_;
+    public boolean hasLeader() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public com.squareup.cascading2.generated.Example.Person getLeader() {
+      return leader_;
+    }
+    public com.squareup.cascading2.generated.Example.PersonOrBuilder getLeaderOrBuilder() {
+      return leader_;
+    }
+    
+    // required .com.squareup.cascading2.generated.Person follower = 2;
+    public static final int FOLLOWER_FIELD_NUMBER = 2;
+    private com.squareup.cascading2.generated.Example.Person follower_;
+    public boolean hasFollower() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public com.squareup.cascading2.generated.Example.Person getFollower() {
+      return follower_;
+    }
+    public com.squareup.cascading2.generated.Example.PersonOrBuilder getFollowerOrBuilder() {
+      return follower_;
+    }
+    
+    private void initFields() {
+      leader_ = com.squareup.cascading2.generated.Example.Person.getDefaultInstance();
+      follower_ = com.squareup.cascading2.generated.Example.Person.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      if (!hasLeader()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasFollower()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getLeader().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getFollower().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, leader_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, follower_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, leader_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, follower_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.squareup.cascading2.generated.Example.Partnership parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Partnership parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Partnership parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Partnership parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Partnership parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Partnership parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Partnership parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.squareup.cascading2.generated.Example.Partnership parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.squareup.cascading2.generated.Example.Partnership parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Partnership parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.squareup.cascading2.generated.Example.Partnership prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.squareup.cascading2.generated.Example.PartnershipOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Partnership_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Partnership_fieldAccessorTable;
+      }
+      
+      // Construct using com.squareup.cascading2.generated.Example.Partnership.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getLeaderFieldBuilder();
+          getFollowerFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (leaderBuilder_ == null) {
+          leader_ = com.squareup.cascading2.generated.Example.Person.getDefaultInstance();
+        } else {
+          leaderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (followerBuilder_ == null) {
+          follower_ = com.squareup.cascading2.generated.Example.Person.getDefaultInstance();
+        } else {
+          followerBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.squareup.cascading2.generated.Example.Partnership.getDescriptor();
+      }
+      
+      public com.squareup.cascading2.generated.Example.Partnership getDefaultInstanceForType() {
+        return com.squareup.cascading2.generated.Example.Partnership.getDefaultInstance();
+      }
+      
+      public com.squareup.cascading2.generated.Example.Partnership build() {
+        com.squareup.cascading2.generated.Example.Partnership result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.squareup.cascading2.generated.Example.Partnership buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.squareup.cascading2.generated.Example.Partnership result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.squareup.cascading2.generated.Example.Partnership buildPartial() {
+        com.squareup.cascading2.generated.Example.Partnership result = new com.squareup.cascading2.generated.Example.Partnership(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (leaderBuilder_ == null) {
+          result.leader_ = leader_;
+        } else {
+          result.leader_ = leaderBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (followerBuilder_ == null) {
+          result.follower_ = follower_;
+        } else {
+          result.follower_ = followerBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.squareup.cascading2.generated.Example.Partnership) {
+          return mergeFrom((com.squareup.cascading2.generated.Example.Partnership)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.squareup.cascading2.generated.Example.Partnership other) {
+        if (other == com.squareup.cascading2.generated.Example.Partnership.getDefaultInstance()) return this;
+        if (other.hasLeader()) {
+          mergeLeader(other.getLeader());
+        }
+        if (other.hasFollower()) {
+          mergeFollower(other.getFollower());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        if (!hasLeader()) {
+          
+          return false;
+        }
+        if (!hasFollower()) {
+          
+          return false;
+        }
+        if (!getLeader().isInitialized()) {
+          
+          return false;
+        }
+        if (!getFollower().isInitialized()) {
+          
+          return false;
+        }
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              com.squareup.cascading2.generated.Example.Person.Builder subBuilder = com.squareup.cascading2.generated.Example.Person.newBuilder();
+              if (hasLeader()) {
+                subBuilder.mergeFrom(getLeader());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setLeader(subBuilder.buildPartial());
+              break;
+            }
+            case 18: {
+              com.squareup.cascading2.generated.Example.Person.Builder subBuilder = com.squareup.cascading2.generated.Example.Person.newBuilder();
+              if (hasFollower()) {
+                subBuilder.mergeFrom(getFollower());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setFollower(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // required .com.squareup.cascading2.generated.Person leader = 1;
+      private com.squareup.cascading2.generated.Example.Person leader_ = com.squareup.cascading2.generated.Example.Person.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.squareup.cascading2.generated.Example.Person, com.squareup.cascading2.generated.Example.Person.Builder, com.squareup.cascading2.generated.Example.PersonOrBuilder> leaderBuilder_;
+      public boolean hasLeader() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public com.squareup.cascading2.generated.Example.Person getLeader() {
+        if (leaderBuilder_ == null) {
+          return leader_;
+        } else {
+          return leaderBuilder_.getMessage();
+        }
+      }
+      public Builder setLeader(com.squareup.cascading2.generated.Example.Person value) {
+        if (leaderBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          leader_ = value;
+          onChanged();
+        } else {
+          leaderBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setLeader(
+          com.squareup.cascading2.generated.Example.Person.Builder builderForValue) {
+        if (leaderBuilder_ == null) {
+          leader_ = builderForValue.build();
+          onChanged();
+        } else {
+          leaderBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeLeader(com.squareup.cascading2.generated.Example.Person value) {
+        if (leaderBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              leader_ != com.squareup.cascading2.generated.Example.Person.getDefaultInstance()) {
+            leader_ =
+              com.squareup.cascading2.generated.Example.Person.newBuilder(leader_).mergeFrom(value).buildPartial();
+          } else {
+            leader_ = value;
+          }
+          onChanged();
+        } else {
+          leaderBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearLeader() {
+        if (leaderBuilder_ == null) {
+          leader_ = com.squareup.cascading2.generated.Example.Person.getDefaultInstance();
+          onChanged();
+        } else {
+          leaderBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public com.squareup.cascading2.generated.Example.Person.Builder getLeaderBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getLeaderFieldBuilder().getBuilder();
+      }
+      public com.squareup.cascading2.generated.Example.PersonOrBuilder getLeaderOrBuilder() {
+        if (leaderBuilder_ != null) {
+          return leaderBuilder_.getMessageOrBuilder();
+        } else {
+          return leader_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.squareup.cascading2.generated.Example.Person, com.squareup.cascading2.generated.Example.Person.Builder, com.squareup.cascading2.generated.Example.PersonOrBuilder> 
+          getLeaderFieldBuilder() {
+        if (leaderBuilder_ == null) {
+          leaderBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.squareup.cascading2.generated.Example.Person, com.squareup.cascading2.generated.Example.Person.Builder, com.squareup.cascading2.generated.Example.PersonOrBuilder>(
+                  leader_,
+                  getParentForChildren(),
+                  isClean());
+          leader_ = null;
+        }
+        return leaderBuilder_;
+      }
+      
+      // required .com.squareup.cascading2.generated.Person follower = 2;
+      private com.squareup.cascading2.generated.Example.Person follower_ = com.squareup.cascading2.generated.Example.Person.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          com.squareup.cascading2.generated.Example.Person, com.squareup.cascading2.generated.Example.Person.Builder, com.squareup.cascading2.generated.Example.PersonOrBuilder> followerBuilder_;
+      public boolean hasFollower() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public com.squareup.cascading2.generated.Example.Person getFollower() {
+        if (followerBuilder_ == null) {
+          return follower_;
+        } else {
+          return followerBuilder_.getMessage();
+        }
+      }
+      public Builder setFollower(com.squareup.cascading2.generated.Example.Person value) {
+        if (followerBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          follower_ = value;
+          onChanged();
+        } else {
+          followerBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder setFollower(
+          com.squareup.cascading2.generated.Example.Person.Builder builderForValue) {
+        if (followerBuilder_ == null) {
+          follower_ = builderForValue.build();
+          onChanged();
+        } else {
+          followerBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder mergeFollower(com.squareup.cascading2.generated.Example.Person value) {
+        if (followerBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              follower_ != com.squareup.cascading2.generated.Example.Person.getDefaultInstance()) {
+            follower_ =
+              com.squareup.cascading2.generated.Example.Person.newBuilder(follower_).mergeFrom(value).buildPartial();
+          } else {
+            follower_ = value;
+          }
+          onChanged();
+        } else {
+          followerBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder clearFollower() {
+        if (followerBuilder_ == null) {
+          follower_ = com.squareup.cascading2.generated.Example.Person.getDefaultInstance();
+          onChanged();
+        } else {
+          followerBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      public com.squareup.cascading2.generated.Example.Person.Builder getFollowerBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getFollowerFieldBuilder().getBuilder();
+      }
+      public com.squareup.cascading2.generated.Example.PersonOrBuilder getFollowerOrBuilder() {
+        if (followerBuilder_ != null) {
+          return followerBuilder_.getMessageOrBuilder();
+        } else {
+          return follower_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          com.squareup.cascading2.generated.Example.Person, com.squareup.cascading2.generated.Example.Person.Builder, com.squareup.cascading2.generated.Example.PersonOrBuilder> 
+          getFollowerFieldBuilder() {
+        if (followerBuilder_ == null) {
+          followerBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              com.squareup.cascading2.generated.Example.Person, com.squareup.cascading2.generated.Example.Person.Builder, com.squareup.cascading2.generated.Example.PersonOrBuilder>(
+                  follower_,
+                  getParentForChildren(),
+                  isClean());
+          follower_ = null;
+        }
+        return followerBuilder_;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.squareup.cascading2.generated.Partnership)
+    }
+    
+    static {
+      defaultInstance = new Partnership(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.squareup.cascading2.generated.Partnership)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_squareup_cascading2_generated_Person_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_squareup_cascading2_generated_Person_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_squareup_cascading2_generated_Partnership_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_squareup_cascading2_generated_Partnership_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -566,7 +1170,11 @@ public final class Example {
     java.lang.String[] descriptorData = {
       "\n\026src/main/example.proto\022!com.squareup.c" +
       "ascading2.generated\"1\n\006Person\022\n\n\002id\030\001 \002(" +
-      "\005\022\014\n\004name\030\002 \002(\t\022\r\n\005email\030\003 \001(\t"
+      "\005\022\014\n\004name\030\002 \002(\t\022\r\n\005email\030\003 \001(\t\"\205\001\n\013Partn" +
+      "ership\0229\n\006leader\030\001 \002(\0132).com.squareup.ca" +
+      "scading2.generated.Person\022;\n\010follower\030\002 " +
+      "\002(\0132).com.squareup.cascading2.generated." +
+      "Person"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -581,6 +1189,14 @@ public final class Example {
               new java.lang.String[] { "Id", "Name", "Email", },
               com.squareup.cascading2.generated.Example.Person.class,
               com.squareup.cascading2.generated.Example.Person.Builder.class);
+          internal_static_com_squareup_cascading2_generated_Partnership_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_com_squareup_cascading2_generated_Partnership_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_squareup_cascading2_generated_Partnership_descriptor,
+              new java.lang.String[] { "Leader", "Follower", },
+              com.squareup.cascading2.generated.Example.Partnership.class,
+              com.squareup.cascading2.generated.Example.Partnership.Builder.class);
           return null;
         }
       };
