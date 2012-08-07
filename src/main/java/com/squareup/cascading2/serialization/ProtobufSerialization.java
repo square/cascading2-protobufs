@@ -2,6 +2,7 @@ package com.squareup.cascading2.serialization;
 
 import cascading.tuple.Comparison;
 import com.google.protobuf.Message;
+import com.squareup.cascading2.util.Util;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -59,16 +60,7 @@ public class ProtobufSerialization<T extends Message> extends Configured impleme
     private final Message.Builder builder;
 
     public ProtobufDeserializer(Class<T> messageClass) {
-      try {
-        Method m = messageClass.getMethod("newBuilder");
-        builder = (Message.Builder) m.invoke(new Object[]{});
-      } catch (IllegalAccessException e) {
-        throw new RuntimeException(e);
-      } catch (NoSuchMethodException e) {
-        throw new RuntimeException(e);
-      } catch (InvocationTargetException e) {
-        throw new RuntimeException(e);
-      }
+      builder = Util.builderFromMessageClass(messageClass.getName());
     }
 
     @Override public void open(InputStream inputStream) throws IOException {
