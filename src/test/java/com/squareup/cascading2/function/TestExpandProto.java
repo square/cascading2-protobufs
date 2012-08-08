@@ -27,13 +27,16 @@ import org.apache.hadoop.fs.Path;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
- * Created with IntelliJ IDEA. User: duxbury Date: 8/6/12 Time: 11:58 AM To change this template use
- * File | Settings | File Templates.
+ * Author: duxbury
  */
 public class TestExpandProto extends TestCase {
 
-  private static final Example.Person.Builder BRYAN =
-      Example.Person.newBuilder().setName("bryan").setId(1).setEmail("bryan@mail.com");
+  private static final Example.Person.Builder BRYAN = Example.Person
+      .newBuilder()
+      .setName("bryan")
+      .setId(1)
+      .setEmail("bryan@mail.com")
+      .setPosition(Example.Person.Position.CEO);
   private static final Example.Person.Builder LUCAS =
       Example.Person.newBuilder().setName("lucas").setId(2);
 
@@ -42,12 +45,12 @@ public class TestExpandProto extends TestCase {
     List<Tuple> results =
         operateFunction(allFields, new TupleEntry(new Fields("value"), new Tuple(BRYAN.build())));
     Tuple result = results.get(0);
-    assertEquals(new Tuple(1, "bryan", "bryan@mail.com"), result);
+    assertEquals(new Tuple(1, "bryan", "bryan@mail.com", Example.Person.Position.CEO.getNumber()), result);
 
     results =
         operateFunction(allFields, new TupleEntry(new Fields("value"), new Tuple(LUCAS.build())));
     result = results.get(0);
-    assertEquals(new Tuple(2, "lucas", null), result);
+    assertEquals(new Tuple(2, "lucas", null, null), result);
   }
 
   public void testNested() throws Exception {
@@ -109,7 +112,7 @@ public class TestExpandProto extends TestCase {
     collector.close();
 
     Pipe inPipe = new Pipe("in");
-    Pipe p = new Each(inPipe, new Fields("value"), new ExpandProto(Example.Person.class), new Fields("id", "name", "email"));
+    Pipe p = new Each(inPipe, new Fields("value"), new ExpandProto(Example.Person.class), new Fields("id", "name", "email", "position"));
 
     Hfs sink = new Hfs(new TextLine(), "/tmp/output");
     new HadoopFlowConnector().connect(inTap, sink, p).complete();
@@ -121,7 +124,7 @@ public class TestExpandProto extends TestCase {
     }
     assertEquals(1, results.size());
 
-    assertEquals(new Tuple(0, 1, "bryan", "bryan@mail.com").toString(), results.get(0).toString());
+    assertEquals(new Tuple(0, 1, "bryan", "bryan@mail.com", Example.Person.Position.CEO.getNumber()).toString(), results.get(0).toString());
   }
 
   private static List<Tuple> operateFunction(Function func, final TupleEntry argument) {

@@ -4,6 +4,12 @@ message Person {
   required int32 id = 1;
   required string name = 2;
   optional string email = 3;
+
+  enum Position {
+    CEO = 1;
+    GRUNT = 2;
+  }
+  optional Position position = 4;
 }
 
 message Partnership {

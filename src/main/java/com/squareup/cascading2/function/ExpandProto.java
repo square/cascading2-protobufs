@@ -98,7 +98,13 @@ public class ExpandProto<T extends Message> extends BaseOperation implements Fun
 
     for (Descriptors.FieldDescriptor fieldDescriptor : getFieldDescriptorsToExtract()) {
       if (arg.hasField(fieldDescriptor)) {
-        result.add(arg.getField(fieldDescriptor));
+        Object fieldValue = arg.getField(fieldDescriptor);
+        if (fieldDescriptor.getJavaType() == Descriptors.FieldDescriptor.JavaType.ENUM) {
+          Descriptors.EnumValueDescriptor valueDescriptor =
+              (Descriptors.EnumValueDescriptor) fieldValue;
+          fieldValue = valueDescriptor.getNumber();
+        }
+        result.add(fieldValue);
       } else {
         result.add(null);
       }

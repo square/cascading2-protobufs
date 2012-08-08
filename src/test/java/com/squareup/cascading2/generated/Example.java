@@ -22,6 +22,10 @@ public final class Example {
     // optional string email = 3;
     boolean hasEmail();
     String getEmail();
+    
+    // optional .com.squareup.cascading2.generated.Person.Position position = 4;
+    boolean hasPosition();
+    com.squareup.cascading2.generated.Example.Person.Position getPosition();
   }
   public static final class Person extends
       com.google.protobuf.GeneratedMessage
@@ -49,6 +53,75 @@ public final class Example {
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
       return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Person_fieldAccessorTable;
+    }
+    
+    public enum Position
+        implements com.google.protobuf.ProtocolMessageEnum {
+      CEO(0, 1),
+      GRUNT(1, 2),
+      ;
+      
+      public static final int CEO_VALUE = 1;
+      public static final int GRUNT_VALUE = 2;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static Position valueOf(int value) {
+        switch (value) {
+          case 1: return CEO;
+          case 2: return GRUNT;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<Position>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<Position>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Position>() {
+              public Position findValueByNumber(int number) {
+                return Position.valueOf(number);
+              }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return com.squareup.cascading2.generated.Example.Person.getDescriptor().getEnumTypes().get(0);
+      }
+      
+      private static final Position[] VALUES = {
+        CEO, GRUNT, 
+      };
+      
+      public static Position valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      
+      private final int index;
+      private final int value;
+      
+      private Position(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      // @@protoc_insertion_point(enum_scope:com.squareup.cascading2.generated.Person.Position)
     }
     
     private int bitField0_;
@@ -126,10 +199,21 @@ public final class Example {
       }
     }
     
+    // optional .com.squareup.cascading2.generated.Person.Position position = 4;
+    public static final int POSITION_FIELD_NUMBER = 4;
+    private com.squareup.cascading2.generated.Example.Person.Position position_;
+    public boolean hasPosition() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public com.squareup.cascading2.generated.Example.Person.Position getPosition() {
+      return position_;
+    }
+    
     private void initFields() {
       id_ = 0;
       name_ = "";
       email_ = "";
+      position_ = com.squareup.cascading2.generated.Example.Person.Position.CEO;
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -160,6 +244,9 @@ public final class Example {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         output.writeBytes(3, getEmailBytes());
       }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeEnum(4, position_.getNumber());
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -180,6 +267,10 @@ public final class Example {
       if (((bitField0_ & 0x00000004) == 0x00000004)) {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(3, getEmailBytes());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(4, position_.getNumber());
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -311,6 +402,8 @@ public final class Example {
         bitField0_ = (bitField0_ & ~0x00000002);
         email_ = "";
         bitField0_ = (bitField0_ & ~0x00000004);
+        position_ = com.squareup.cascading2.generated.Example.Person.Position.CEO;
+        bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
       
@@ -361,6 +454,10 @@ public final class Example {
           to_bitField0_ |= 0x00000004;
         }
         result.email_ = email_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.position_ = position_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -385,6 +482,9 @@ public final class Example {
         }
         if (other.hasEmail()) {
           setEmail(other.getEmail());
+        }
+        if (other.hasPosition()) {
+          setPosition(other.getPosition());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -438,6 +538,17 @@ public final class Example {
             case 26: {
               bitField0_ |= 0x00000004;
               email_ = input.readBytes();
+              break;
+            }
+            case 32: {
+              int rawValue = input.readEnum();
+              com.squareup.cascading2.generated.Example.Person.Position value = com.squareup.cascading2.generated.Example.Person.Position.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(4, rawValue);
+              } else {
+                bitField0_ |= 0x00000008;
+                position_ = value;
+              }
               break;
             }
           }
@@ -537,6 +648,30 @@ public final class Example {
         bitField0_ |= 0x00000004;
         email_ = value;
         onChanged();
+      }
+      
+      // optional .com.squareup.cascading2.generated.Person.Position position = 4;
+      private com.squareup.cascading2.generated.Example.Person.Position position_ = com.squareup.cascading2.generated.Example.Person.Position.CEO;
+      public boolean hasPosition() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public com.squareup.cascading2.generated.Example.Person.Position getPosition() {
+        return position_;
+      }
+      public Builder setPosition(com.squareup.cascading2.generated.Example.Person.Position value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000008;
+        position_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearPosition() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        position_ = com.squareup.cascading2.generated.Example.Person.Position.CEO;
+        onChanged();
+        return this;
       }
       
       // @@protoc_insertion_point(builder_scope:com.squareup.cascading2.generated.Person)
@@ -1169,12 +1304,14 @@ public final class Example {
   static {
     java.lang.String[] descriptorData = {
       "\n\026src/main/example.proto\022!com.squareup.c" +
-      "ascading2.generated\"1\n\006Person\022\n\n\002id\030\001 \002(" +
-      "\005\022\014\n\004name\030\002 \002(\t\022\r\n\005email\030\003 \001(\t\"\205\001\n\013Partn" +
-      "ership\0229\n\006leader\030\001 \002(\0132).com.squareup.ca" +
-      "scading2.generated.Person\022;\n\010follower\030\002 " +
-      "\002(\0132).com.squareup.cascading2.generated." +
-      "Person"
+      "ascading2.generated\"\227\001\n\006Person\022\n\n\002id\030\001 \002" +
+      "(\005\022\014\n\004name\030\002 \002(\t\022\r\n\005email\030\003 \001(\t\022D\n\010posit" +
+      "ion\030\004 \001(\01622.com.squareup.cascading2.gene" +
+      "rated.Person.Position\"\036\n\010Position\022\007\n\003CEO" +
+      "\020\001\022\t\n\005GRUNT\020\002\"\205\001\n\013Partnership\0229\n\006leader\030" +
+      "\001 \002(\0132).com.squareup.cascading2.generate" +
+      "d.Person\022;\n\010follower\030\002 \002(\0132).com.squareu" +
+      "p.cascading2.generated.Person"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1186,7 +1323,7 @@ public final class Example {
           internal_static_com_squareup_cascading2_generated_Person_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_com_squareup_cascading2_generated_Person_descriptor,
-              new java.lang.String[] { "Id", "Name", "Email", },
+              new java.lang.String[] { "Id", "Name", "Email", "Position", },
               com.squareup.cascading2.generated.Example.Person.class,
               com.squareup.cascading2.generated.Example.Person.Builder.class);
           internal_static_com_squareup_cascading2_generated_Partnership_descriptor =
