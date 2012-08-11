@@ -24,75 +24,86 @@ import org.apache.hadoop.mapred.SequenceFileOutputFormat;
  * and Protocol Buffers serialized objects wrapped in BytesWritable values.
  */
 public class ProtobufScheme extends SequenceFile {
-  private transient Message.Builder prototype;
-  private final String fieldName;
-  private final String messageClassName;
+	private transient Message.Builder prototype;
+	private final String fieldName;
+	private final String messageClassName;
 
-  public ProtobufScheme(String fieldName, Class<? extends Message> messageClass) {
-    super(new Fields(fieldName));
-    this.fieldName = fieldName;
-    messageClassName = messageClass.getName();
-  }
+	public ProtobufScheme(String fieldName, Class<? extends Message> messageClass) {
+		super(new Fields(fieldName));
+		this.fieldName = fieldName;
+		messageClassName = messageClass.getName();
+	}
 
-  @Override public void sourcePrepare(FlowProcess<JobConf> flowProcess,
-      SourceCall<Object[], RecordReader> sourceCall) {
-  }
+	@Override public void sourcePrepare(FlowProcess<JobConf> flowProcess,
+			SourceCall<Object[], RecordReader> sourceCall) {
+		Object[] pair = new Object[]{sourceCall.getInput().createKey(), 
+				sourceCall.getInput().createValue()};
+		sourceCall.setContext( pair );
+	}
 
-  @Override
-  public void sinkConfInit(FlowProcess<JobConf> flowProcess,
-      Tap<JobConf, RecordReader, OutputCollector> tap, JobConf conf) {
-    conf.setOutputKeyClass(NullWritable.class);
-    conf.setOutputValueClass(BytesWritable.class);
+	@Override
+	public void sourceCleanup( FlowProcess<JobConf> flowProcess, SourceCall<Object[], RecordReader> sourceCall )
+	{
+		sourceCall.setContext( null );
+	}
 
-    conf.setOutputFormat(SequenceFileOutputFormat.class);
-  }
+	@Override
+	public void sinkConfInit(FlowProcess<JobConf> flowProcess,
+			Tap<JobConf, RecordReader, OutputCollector> tap, JobConf conf) {
+		conf.setOutputKeyClass(NullWritable.class);
+		conf.setOutputValueClass(BytesWritable.class);
 
-  @Override
-  public boolean source(FlowProcess<JobConf> flowProcess,
-      SourceCall<Object[], RecordReader> sourceCall) throws IOException {
-    // TODO: cache this BytesWritable in the context
-    BytesWritable value = new BytesWritable();
-    boolean result = sourceCall.getInput().next(NullWritable.get(), value);
+		conf.setOutputFormat(SequenceFileOutputFormat.class);
+	}
 
-    if (!result) return false;
+	@Override
+	public boolean source(FlowProcess<JobConf> flowProcess,
+			SourceCall<Object[], RecordReader> sourceCall) throws IOException {
+		// TODO: cache this BytesWritable in the context
+		Object key = sourceCall.getContext()[ 0 ];
+		Object val = sourceCall.getContext()[ 1 ];
 
-    Tuple tuple = sourceCall.getIncomingEntry().getTuple();
-    tuple.clear();
+		boolean result = sourceCall.getInput().next(key, val);
+		if (!result) return false;
 
-    tuple.add(getPrototype().mergeFrom(value.getBytes(), 0, value.getLength()).build());
+		Tuple tuple = sourceCall.getIncomingEntry().getTuple();
+		tuple.clear();
 
-    return true;
-  }
+		BytesWritable value = (BytesWritable)val;
+		tuple.add(getPrototype().mergeFrom(value.getBytes(), 0, value.getLength()).build());
 
-  private Message.Builder getPrototype() {
-    if (prototype == null) {
-      prototype = Util.builderFromMessageClass(messageClassName);
-    }
-    return prototype;
-  }
+		return true;
+	}
 
-  @Override
-  public void sink(FlowProcess<JobConf> flowProcess, SinkCall<Void, OutputCollector> sinkCall)
-      throws IOException {
-    TupleEntry tupleEntry = sinkCall.getOutgoingEntry();
+	private Message.Builder getPrototype() {
+		if (prototype == null) {
+			prototype = Util.builderFromMessageClass(messageClassName);
+		}
+		return prototype;
+	}
 
-    Message message = (Message)tupleEntry.getObject(fieldName);
-    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    message.writeTo(baos);
-    // TODO: cache this BytesWritable
-    BytesWritable outputWritable = new BytesWritable(baos.toByteArray());
+	@Override
+	public void sink(FlowProcess<JobConf> flowProcess, SinkCall<Void, OutputCollector> sinkCall)
+			throws IOException {
+		TupleEntry tupleEntry = sinkCall.getOutgoingEntry();
 
-    sinkCall.getOutput().collect(NullWritable.get(), outputWritable);
-  }
+		Message message = (Message)tupleEntry.getObject(fieldName);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		message.writeTo(baos);
+		// TODO: cache this BytesWritable
+		BytesWritable outputWritable = new BytesWritable(baos.toByteArray());
 
-  @Override
-  public boolean equals(Object object) {
-    if (this == object) return true;
-    if (!(object instanceof ProtobufScheme)) return false;
-    if (!super.equals(object)) return false;
+		sinkCall.getOutput().collect(NullWritable.get(), outputWritable);
+	}
 
-    // TODO: reimplement this
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) return true;
+		if (!(object instanceof ProtobufScheme)) return false;
+		if (!super.equals(object)) return false;
 
-    return true;
-  }
+		// TODO: reimplement this
+
+		return true;
+	}
 }
