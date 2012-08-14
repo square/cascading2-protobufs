@@ -59,7 +59,9 @@ public class ProtobufScheme extends SequenceFile {
     Tuple tuple = sourceCall.getIncomingEntry().getTuple();
     tuple.clear();
 
-    tuple.add(getPrototype().mergeFrom(value.getBytes(), 0, value.getLength()).build());
+    Message.Builder builder = getPrototype();
+    builder.clear();
+    tuple.add(builder.mergeFrom(value.getBytes(), 0, value.getLength()).build());
 
     return true;
   }
