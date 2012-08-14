@@ -109,6 +109,7 @@ public class TestExpandProto extends TestCase {
     Hfs inTap = new Hfs(new ProtobufScheme("value", Example.Person.class), "/tmp/input");
     TupleEntryCollector collector = inTap.openForWrite(new HadoopFlowProcess());
     collector.add(new TupleEntry(new Fields("value"), new Tuple(BRYAN.build())));
+    collector.add(new TupleEntry(new Fields("value"), new Tuple(LUCAS.build())));
     collector.close();
 
     Pipe inPipe = new Pipe("in");
@@ -122,9 +123,10 @@ public class TestExpandProto extends TestCase {
     while (iter.hasNext()) {
       results.add(iter.next().getTupleCopy());
     }
-    assertEquals(1, results.size());
+    assertEquals(2, results.size());
 
     assertEquals(new Tuple(0, 1, "bryan", "bryan@mail.com", Example.Person.Position.CEO.getNumber()).toString(), results.get(0).toString());
+    assertEquals(new Tuple(25, 2, "lucas", null, null).toString(), results.get(1).toString());
   }
 
   private static List<Tuple> operateFunction(Function func, final TupleEntry argument) {

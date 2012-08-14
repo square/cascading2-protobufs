@@ -30,7 +30,7 @@ public class TestProtobufScheme extends TestCase {
     List<Tuple> expected = new ArrayList<Tuple>();
     expected.add(fixture("bryan", "bryan.duxbury@mail.com", 1));
     expected.add(fixture("lucas", "lucas@mail.com", 2));
-    expected.add(fixture("vida", "vida@mail.com", 3));
+    expected.add(fixture("vida", null, 3));
 
     Tap inputTap = new Hfs(new ProtobufScheme("value", Example.Person.class), "/tmp/input");
     TupleEntryCollector tec = inputTap.openForWrite(new HadoopFlowProcess(), null);
@@ -52,6 +52,14 @@ public class TestProtobufScheme extends TestCase {
   }
 
   private Tuple fixture(String name, String email, int id) {
-    return new Tuple(Example.Person.newBuilder().setName(name).setEmail(email).setId(id).build());
+    Example.Person.Builder builder = Example.Person.newBuilder();
+    builder.setId(id);
+    if (name != null) {
+      builder.setName(name);
+    }
+    if (email != null) {
+      builder.setEmail(email);
+    }
+    return new Tuple(builder.build());
   }
 }
