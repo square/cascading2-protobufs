@@ -97,8 +97,17 @@ public class ExpandProto<T extends Message> extends BaseOperation implements Fun
     Tuple result = new Tuple();
 
     for (Descriptors.FieldDescriptor fieldDescriptor : getFieldDescriptorsToExtract()) {
-      if (arg.hasField(fieldDescriptor)) {
-        Object fieldValue = arg.getField(fieldDescriptor);
+      Object fieldValue = null;
+      if (fieldDescriptor.isRepeated()) {
+        if (arg.getRepeatedFieldCount(fieldDescriptor) > 0) {
+          fieldValue = arg.getRepeatedField(fieldDescriptor, 0);
+        }
+      } else {
+        if (arg.hasField(fieldDescriptor)) {
+          fieldValue = arg.getField(fieldDescriptor);
+        }
+      }
+      if (fieldValue != null) {
         if (fieldDescriptor.getJavaType() == Descriptors.FieldDescriptor.JavaType.ENUM) {
           Descriptors.EnumValueDescriptor valueDescriptor =
               (Descriptors.EnumValueDescriptor) fieldValue;
