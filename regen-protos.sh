@@ -1,1 +1,1 @@
-protoc --java_out=src/test/java src/main/example.proto
+protoc --java_out=src/test/java src/test/resources/example.proto
