@@ -15,4 +15,5 @@ message Person {
 message Partnership {
   required Person leader = 1;
   required Person follower = 2;
+  repeated Person silent = 3;
 }

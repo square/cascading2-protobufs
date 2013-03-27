@@ -39,6 +39,12 @@ public class TestExpandProto extends TestCase {
       .setPosition(Example.Person.Position.CEO);
   private static final Example.Person.Builder LUCAS =
       Example.Person.newBuilder().setName("lucas").setId(2);
+  private static final Example.Person.Builder TOM =
+      Example.Person.newBuilder().setName("tom").setId(3);
+  private static final Example.Person.Builder DICK =
+      Example.Person.newBuilder().setName("dick").setId(3);
+  private static final Example.Person.Builder HARRY =
+      Example.Person.newBuilder().setName("harry").setId(3);
 
   public void testSimple() throws Exception {
     ExpandProto allFields = new ExpandProto(Example.Person.class);
@@ -61,7 +67,7 @@ public class TestExpandProto extends TestCase {
             .setLeader(BRYAN)
             .setFollower(LUCAS)
             .build())));
-    assertEquals(new Tuple(BRYAN.build(), LUCAS.build()), results.get(0));
+    assertEquals(new Tuple(BRYAN.build(), LUCAS.build(), null), results.get(0));
 
     results = operateFunction(new ExpandProto(Example.Partnership.class, "leader"),
         new TupleEntry(new Fields("value"), new Tuple(Example.Partnership
@@ -70,6 +76,20 @@ public class TestExpandProto extends TestCase {
             .setFollower(LUCAS)
             .build())));
     assertEquals(new Tuple(BRYAN.build()), results.get(0));
+  }
+
+  public void testRepeated() throws Exception {
+    ExpandProto allFields = new ExpandProto(Example.Partnership.class);
+    List<Tuple> results = operateFunction(allFields, new TupleEntry(new Fields("value"), new Tuple(
+        Example.Partnership
+            .newBuilder()
+            .setLeader(BRYAN)
+            .setFollower(LUCAS)
+            .addSilent(TOM)
+            .addSilent(DICK)
+            .addSilent(HARRY)
+            .build())));
+    assertEquals(new Tuple(BRYAN.build(), LUCAS.build(), TOM.build()), results.get(0));
   }
 
   public void testConstructorErrorCases() throws Exception {
