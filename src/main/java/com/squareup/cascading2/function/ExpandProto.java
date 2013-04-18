@@ -94,6 +94,9 @@ public class ExpandProto<T extends Message> extends BaseOperation implements Fun
 
   @Override public void operate(FlowProcess flowProcess, FunctionCall functionCall) {
     T arg = (T) functionCall.getArguments().getObject(0);
+    if (!arg.getClass().getName().equals(messageClassName)) {
+      throw new IllegalArgumentException("Expected argument of type " + messageClassName + ", found " + arg.getClass().getName());
+    }
     Tuple result = new Tuple();
 
     for (Descriptors.FieldDescriptor fieldDescriptor : getFieldDescriptorsToExtract()) {

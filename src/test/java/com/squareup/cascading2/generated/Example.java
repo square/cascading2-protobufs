@@ -17,7 +17,7 @@ Returns true if {@link #getId() id}  has been set.
     boolean hasId();
     /**
 Returns the field, {@code id}.<br>
-{@code Proto: required int32 id = 1;}
+{@code Proto: optional int32 id = 1;}
 */
     int getId();
     
@@ -27,7 +27,7 @@ Returns true if {@link #getName() name}  has been set.
     boolean hasName();
     /**
 Returns the field, {@code name}.<br>
-{@code Proto: required string name = 2;}
+{@code Proto: optional string name = 2;}
 */
     String getName();
     
@@ -154,7 +154,7 @@ Returns the field, {@code email}.<br>
     }
     
     private int bitField0_;
-    // required int32 id = 1;
+    // optional int32 id = 1;
     public static final int ID_FIELD_NUMBER = 1;
     private int id_;
     public boolean hasId() {
@@ -164,7 +164,7 @@ Returns the field, {@code email}.<br>
       return id_;
     }
     
-    // required string name = 2;
+    // optional string name = 2;
     public static final int NAME_FIELD_NUMBER = 2;
     private java.lang.Object name_;
     public boolean hasName() {
@@ -249,14 +249,6 @@ Returns the field, {@code email}.<br>
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
       
-      if (!hasId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasName()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -520,14 +512,6 @@ Returns the field, {@code email}.<br>
       }
       
       public final boolean isInitialized() {
-        if (!hasId()) {
-          
-          return false;
-        }
-        if (!hasName()) {
-          
-          return false;
-        }
         return true;
       }
       
@@ -586,7 +570,7 @@ Returns the field, {@code email}.<br>
       
       private int bitField0_;
       
-      // required int32 id = 1;
+      // optional int32 id = 1;
       private int id_ ;
       public boolean hasId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
@@ -607,7 +591,7 @@ Returns the field, {@code email}.<br>
         return this;
       }
       
-      // required string name = 2;
+      // optional string name = 2;
       private java.lang.Object name_ = "";
       public boolean hasName() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
@@ -741,7 +725,7 @@ Returns true if {@link #getLeader() leader}  has been set.
     boolean hasLeader();
     /**
 Returns the field, {@code leader}.<br>
-{@code Proto: required .com.squareup.cascading2.generated.Person leader = 1;}
+{@code Proto: optional .com.squareup.cascading2.generated.Person leader = 1;}
 */
     com.squareup.cascading2.generated.Example.Person getLeader();
     com.squareup.cascading2.generated.Example.PersonOrBuilder getLeaderOrBuilder();
@@ -752,7 +736,7 @@ Returns true if {@link #getFollower() follower}  has been set.
     boolean hasFollower();
     /**
 Returns the field, {@code follower}.<br>
-{@code Proto: required .com.squareup.cascading2.generated.Person follower = 2;}
+{@code Proto: optional .com.squareup.cascading2.generated.Person follower = 2;}
 */
     com.squareup.cascading2.generated.Example.Person getFollower();
     com.squareup.cascading2.generated.Example.PersonOrBuilder getFollowerOrBuilder();
@@ -808,7 +792,7 @@ Returns the total number of elements in {@link #getSilentList() silent} .
     }
     
     private int bitField0_;
-    // required .com.squareup.cascading2.generated.Person leader = 1;
+    // optional .com.squareup.cascading2.generated.Person leader = 1;
     public static final int LEADER_FIELD_NUMBER = 1;
     private com.squareup.cascading2.generated.Example.Person leader_;
     public boolean hasLeader() {
@@ -821,7 +805,7 @@ Returns the total number of elements in {@link #getSilentList() silent} .
       return leader_;
     }
     
-    // required .com.squareup.cascading2.generated.Person follower = 2;
+    // optional .com.squareup.cascading2.generated.Person follower = 2;
     public static final int FOLLOWER_FIELD_NUMBER = 2;
     private com.squareup.cascading2.generated.Example.Person follower_;
     public boolean hasFollower() {
@@ -865,28 +849,6 @@ Returns the total number of elements in {@link #getSilentList() silent} .
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
       
-      if (!hasLeader()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasFollower()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!getLeader().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!getFollower().isInitialized()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      for (int i = 0; i < getSilentCount(); i++) {
-        if (!getSilent(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -1185,28 +1147,6 @@ Returns the total number of elements in {@link #getSilentList() silent} .
       }
       
       public final boolean isInitialized() {
-        if (!hasLeader()) {
-          
-          return false;
-        }
-        if (!hasFollower()) {
-          
-          return false;
-        }
-        if (!getLeader().isInitialized()) {
-          
-          return false;
-        }
-        if (!getFollower().isInitialized()) {
-          
-          return false;
-        }
-        for (int i = 0; i < getSilentCount(); i++) {
-          if (!getSilent(i).isInitialized()) {
-            
-            return false;
-          }
-        }
         return true;
       }
       
@@ -1263,7 +1203,7 @@ Returns the total number of elements in {@link #getSilentList() silent} .
       
       private int bitField0_;
       
-      // required .com.squareup.cascading2.generated.Person leader = 1;
+      // optional .com.squareup.cascading2.generated.Person leader = 1;
       private com.squareup.cascading2.generated.Example.Person leader_ = com.squareup.cascading2.generated.Example.Person.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.squareup.cascading2.generated.Example.Person, com.squareup.cascading2.generated.Example.Person.Builder, com.squareup.cascading2.generated.Example.PersonOrBuilder> leaderBuilder_;
@@ -1362,7 +1302,7 @@ Clears the {@link #getLeader() leader}  field.
         return leaderBuilder_;
       }
       
-      // required .com.squareup.cascading2.generated.Person follower = 2;
+      // optional .com.squareup.cascading2.generated.Person follower = 2;
       private com.squareup.cascading2.generated.Example.Person follower_ = com.squareup.cascading2.generated.Example.Person.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           com.squareup.cascading2.generated.Example.Person, com.squareup.cascading2.generated.Example.Person.Builder, com.squareup.cascading2.generated.Example.PersonOrBuilder> followerBuilder_;
@@ -1706,12 +1646,12 @@ Removes the value at {@code index} in {@link #getSilentList() silent} .
     java.lang.String[] descriptorData = {
       "\n src/test/resources/example.proto\022!com." +
       "squareup.cascading2.generated\"\227\001\n\006Person" +
-      "\022\n\n\002id\030\001 \002(\005\022\014\n\004name\030\002 \002(\t\022\r\n\005email\030\003 \001(" +
+      "\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\r\n\005email\030\003 \001(" +
       "\t\022D\n\010position\030\004 \001(\01622.com.squareup.casca" +
       "ding2.generated.Person.Position\"\036\n\010Posit" +
       "ion\022\007\n\003CEO\020\001\022\t\n\005GRUNT\020\002\"\300\001\n\013Partnership\022" +
-      "9\n\006leader\030\001 \002(\0132).com.squareup.cascading" +
-      "2.generated.Person\022;\n\010follower\030\002 \002(\0132).c" +
+      "9\n\006leader\030\001 \001(\0132).com.squareup.cascading" +
+      "2.generated.Person\022;\n\010follower\030\002 \001(\0132).c" +
       "om.squareup.cascading2.generated.Person\022" +
       "9\n\006silent\030\003 \003(\0132).com.squareup.cascading",
       "2.generated.Person"

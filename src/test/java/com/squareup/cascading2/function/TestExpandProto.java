@@ -1,5 +1,6 @@
 package com.squareup.cascading2.function;
 
+import cascading.flow.FlowProcess;
 import cascading.flow.hadoop.HadoopFlowConnector;
 import cascading.flow.hadoop.HadoopFlowProcess;
 import cascading.operation.Function;
@@ -116,6 +117,41 @@ public class TestExpandProto extends TestCase {
       fail("should throw exception with arg length mismatch");
     } catch(IllegalArgumentException e) {
       // ok
+    }
+  }
+
+  public void testWrongArgumentClass() throws Exception {
+    ExpandProto func = new ExpandProto(Example.Person.class, "name");
+    try {
+      func.operate(new HadoopFlowProcess(), new FunctionCall() {
+        @Override public TupleEntry getArguments() {
+          return new TupleEntry(new Fields("partnership"), new Tuple(Example.Partnership.newBuilder().setFollower(
+              Example.Person.newBuilder().setName("bryan")).setLeader(Example.Person.newBuilder().setName("alsoBryan")).build()));
+        }
+
+        @Override public Fields getDeclaredFields() {
+          return null;  //To change body of implemented methods use File | Settings | File Templates.
+        }
+
+        @Override public TupleEntryCollector getOutputCollector() {
+          return null;  //To change body of implemented methods use File | Settings | File Templates.
+        }
+
+        @Override public Object getContext() {
+          return null;  //To change body of implemented methods use File | Settings | File Templates.
+        }
+
+        @Override public void setContext(Object o) {
+          //To change body of implemented methods use File | Settings | File Templates.
+        }
+
+        @Override public Fields getArgumentFields() {
+          return null;  //To change body of implemented methods use File | Settings | File Templates.
+        }
+      });
+      fail("should have thrown an IllegalArgumentException");
+    } catch (IllegalArgumentException e) {
+      // expected!
     }
   }
 
