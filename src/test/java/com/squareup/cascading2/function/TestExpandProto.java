@@ -26,9 +26,6 @@ import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-/**
- * Author: duxbury
- */
 public class TestExpandProto extends TestCase {
 
   private static final Example.Person.Builder BRYAN = Example.Person
@@ -154,6 +151,10 @@ public class TestExpandProto extends TestCase {
     func.operate(null, new FunctionCall() {
       @Override public TupleEntry getArguments() {
         return argument;
+      }
+
+      @Override public Fields getDeclaredFields() {
+        return null;  //To change body of implemented methods use File | Settings | File Templates.
       }
 
       @Override public TupleEntryCollector getOutputCollector() {
