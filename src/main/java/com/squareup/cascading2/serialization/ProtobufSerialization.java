@@ -7,8 +7,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Comparator;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.io.WritableComparator;
@@ -16,10 +14,6 @@ import org.apache.hadoop.io.serializer.Deserializer;
 import org.apache.hadoop.io.serializer.Serialization;
 import org.apache.hadoop.io.serializer.Serializer;
 
-/**
- * Created with IntelliJ IDEA. User: duxbury Date: 8/3/12 Time: 10:12 AM To change this template use
- * File | Settings | File Templates.
- */
 public class ProtobufSerialization<T extends Message> extends Configured implements Serialization<T>,
     Comparison<T> {
   @Override public boolean accept(Class<?> aClass) {

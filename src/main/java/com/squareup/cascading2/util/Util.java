@@ -4,10 +4,6 @@ import com.google.protobuf.Message;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-/**
- * Created with IntelliJ IDEA. User: duxbury Date: 8/6/12 Time: 4:42 PM To change this template use
- * File | Settings | File Templates.
- */
 public final class Util {
   private Util() {}
 

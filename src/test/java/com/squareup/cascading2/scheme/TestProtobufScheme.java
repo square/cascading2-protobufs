@@ -1,7 +1,6 @@
 package com.squareup.cascading2.scheme;
 
 import cascading.flow.hadoop.HadoopFlowProcess;
-import cascading.scheme.hadoop.TextLine;
 import cascading.tap.Tap;
 import cascading.tap.hadoop.Hfs;
 import cascading.tuple.Fields;
@@ -18,10 +17,6 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 
-/**
- * Created with IntelliJ IDEA. User: duxbury Date: 8/2/12 Time: 11:37 AM To change this template use
- * File | Settings | File Templates.
- */
 public class TestProtobufScheme extends TestCase {
   public void testRoundtrip() throws Exception {
     FileSystem.get(new Configuration()).delete(new Path("/tmp/input"), true);

@@ -1,6 +1,5 @@
 package com.squareup.cascading2.function;
 
-import cascading.flow.FlowProcess;
 import cascading.flow.hadoop.HadoopFlowConnector;
 import cascading.flow.hadoop.HadoopFlowProcess;
 import cascading.operation.Function;
@@ -18,14 +17,11 @@ import com.squareup.cascading2.generated.Example;
 import com.squareup.cascading2.scheme.ProtobufScheme;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import junit.framework.TestCase;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class TestExpandProto extends TestCase {
 

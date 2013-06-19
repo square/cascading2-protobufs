@@ -14,10 +14,6 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created with IntelliJ IDEA. User: duxbury Date: 8/6/12 Time: 11:31 AM To change this template use
- * File | Settings | File Templates.
- */
 public class ExpandProto<T extends Message> extends BaseOperation implements Function {
   private final String messageClassName;
   private final String[] fieldsToExtract;

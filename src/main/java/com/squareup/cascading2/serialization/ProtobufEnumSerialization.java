@@ -10,7 +10,6 @@ import org.apache.hadoop.io.serializer.Deserializer;
 import org.apache.hadoop.io.serializer.Serialization;
 import org.apache.hadoop.io.serializer.Serializer;
 
-/** Author: duxbury */
 public class ProtobufEnumSerialization implements Serialization<Descriptors.EnumValueDescriptor> {
   @Override public boolean accept(Class<?> aClass) {
     return Descriptors.EnumValueDescriptor.class.isAssignableFrom(aClass);

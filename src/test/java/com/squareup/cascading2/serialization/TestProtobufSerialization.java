@@ -31,10 +31,6 @@ import org.apache.hadoop.io.serializer.Serializer;
 import org.apache.hadoop.mapred.JobConf;
 import org.junit.Ignore;
 
-/**
- * Created with IntelliJ IDEA. User: duxbury Date: 8/3/12 Time: 10:54 AM To change this template use
- * File | Settings | File Templates.
- */
 public class TestProtobufSerialization extends TestCase {
 
   public void testBareRoundtrip() throws Exception {
