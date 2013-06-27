@@ -28,6 +28,13 @@ public class ExtractProtoTest extends TestCase {
       .setLeader(Example.Person.newBuilder().setName("Bryan").setEmail("bryan@"))
       .build();
 
+  private static final Example.Partnership P3 = Example.Partnership.newBuilder()
+      .setLeader(Example.Person.newBuilder()
+          .setName("Jack")
+          .setEmail("jack@")
+          .setPosition(Example.Person.Position.CEO))
+      .build();
+
   public void testValidatesNonExistingField() throws Exception {
     try {
       new ExtractProto(Example.Partnership.class, "follower.has_mind_powers");
@@ -65,6 +72,11 @@ public class ExtractProtoTest extends TestCase {
   public void testSomePresent() throws Exception {
     assertEquals(new Tuple(null, null, "Bryan", "bryan@"),
         exec(new ExtractProto(Example.Partnership.class, "follower.name", "follower.email", "leader.name", "leader.email"), new Tuple(P2)));
+  }
+
+  public void testEnum() throws Exception {
+    assertEquals(new Tuple("Jack", "jack@", Example.Person.Position.CEO),
+        exec(new ExtractProto(Example.Partnership.class, "leader.name", "leader.email", "leader.position"), new Tuple(P3)));
   }
 
   private static Tuple exec(Function f, final Tuple input) {
