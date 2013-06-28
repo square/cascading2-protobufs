@@ -15,7 +15,11 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExpandRepeatedProto <T extends Message> extends ExpandProto<T> {
+public class ExpandRepeatedProto <T extends Message> extends BaseOperation implements Function {
+  private final String messageClassName;
+  private final String[] fieldsToExtract;
+
+  private transient Descriptors.FieldDescriptor[] fieldDescriptorsToExtract;
 
   /** Expand the entire struct, using the same field names as they are found in the struct. */
   public ExpandRepeatedProto(Class<T> messageClass) {
@@ -24,7 +28,7 @@ public class ExpandRepeatedProto <T extends Message> extends ExpandProto<T> {
 
   /** Expand the entire struct, using the supplied field names to name the resultant fields. */
   public ExpandRepeatedProto(Class<T> messageClass, Fields fieldDeclaration) {
-    this(messageClass, fieldDeclaration, getAllFields(messageClass));
+    this(messageClass, fieldDeclaration, ExpandProto.getAllFields(messageClass));
   }
 
   /**
@@ -41,10 +45,33 @@ public class ExpandRepeatedProto <T extends Message> extends ExpandProto<T> {
    */
   public ExpandRepeatedProto(Class<T> messageClass, Fields fieldDeclaration,
       String... fieldsToExtract) {
-    super(messageClass, fieldDeclaration, fieldsToExtract);
+    // Set up fields and perform basic checks
+    super(1, fieldDeclaration);
+    if (fieldDeclaration.size() != fieldsToExtract.length) {
+      throw new IllegalArgumentException("Fields "
+          + fieldDeclaration
+          + " doesn't have enough field names to identify all "
+          + fieldsToExtract.length
+          + " fields in "
+          + messageClass.getName());
+    }
 
     Message.Builder builder = Util.builderFromMessageClass(messageClass.getName());
 
+    for (int i = 0; i < fieldsToExtract.length; i++) {
+      Descriptors.FieldDescriptor field = builder.getDescriptorForType().findFieldByName(fieldsToExtract[i]);
+      if (field == null) {
+        throw new IllegalArgumentException("Could not find a field named '"
+            + fieldsToExtract[i]
+            + "' in message class "
+            + messageClass.getName());
+      }
+    }
+
+    this.fieldsToExtract = fieldsToExtract;
+    this.messageClassName = messageClass.getName();
+
+    // Check repeated fields
     int repeatedCount = 0;
 
     for (int i = 0; i < fieldsToExtract.length; i++) {
@@ -87,9 +114,9 @@ public class ExpandRepeatedProto <T extends Message> extends ExpandProto<T> {
     Tuple prototypeTuple = new Tuple();
     int repeatedFieldIndex = -1;
 
-    Descriptors.FieldDescriptor[] fields = getFieldDescriptorsToExtract();
-    for (int i = 0; i < fields.length; i++) {
-      Descriptors.FieldDescriptor fieldDescriptor = fields[i];
+    fieldDescriptorsToExtract = ExpandProto.getFieldDescriptorsToExtract(fieldDescriptorsToExtract, messageClassName, fieldsToExtract);
+    for (int i = 0; i < fieldDescriptorsToExtract.length; i++) {
+      Descriptors.FieldDescriptor fieldDescriptor = fieldDescriptorsToExtract[i];
 
       if (fieldDescriptor.isRepeated()) {
         repeatedFieldIndex = i;
@@ -115,7 +142,7 @@ public class ExpandRepeatedProto <T extends Message> extends ExpandProto<T> {
       }
     }
 
-    Descriptors.FieldDescriptor repeatedField = fields[repeatedFieldIndex];
+    Descriptors.FieldDescriptor repeatedField = fieldDescriptorsToExtract[repeatedFieldIndex];
     for (Object value : (List<Object>) arg.getField(repeatedField)) {
       Tuple copy = new Tuple(prototypeTuple);
       copy.set(repeatedFieldIndex, value);
