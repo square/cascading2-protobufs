@@ -178,7 +178,7 @@ public class TestExpandProto extends TestCase {
     assertEquals(new Tuple(25, 2, "lucas", null, null).toString(), results.get(1).toString());
   }
 
-  private static List<Tuple> operateFunction(Function func, final TupleEntry argument) {
+  protected static List<Tuple> operateFunction(Function func, final TupleEntry argument) {
     final List<Tuple> results = new ArrayList<Tuple>();
     func.operate(null, new FunctionCall() {
       @Override public TupleEntry getArguments() {

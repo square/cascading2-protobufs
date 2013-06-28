@@ -1625,6 +1625,905 @@ Removes the value at {@code index} in {@link #getSilentList() silent} .
     // @@protoc_insertion_point(class_scope:com.squareup.cascading2.generated.Partnership)
   }
   
+  public interface MarketOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    /**
+Returns the field, {@code sellers}.<br>
+{@code Proto: repeated .com.squareup.cascading2.generated.Person sellers = 1;}
+*/
+    java.util.List<com.squareup.cascading2.generated.Example.Person> 
+        getSellersList();
+    /**
+Returns the element at {@code index} in {@link #getSellersList() sellers} .
+*/
+    com.squareup.cascading2.generated.Example.Person getSellers(int index);
+    /**
+Returns the total number of elements in {@link #getSellersList() sellers} .
+*/
+    int getSellersCount();
+    java.util.List<? extends com.squareup.cascading2.generated.Example.PersonOrBuilder> 
+        getSellersOrBuilderList();
+    com.squareup.cascading2.generated.Example.PersonOrBuilder getSellersOrBuilder(
+        int index);
+    
+    /**
+Returns the field, {@code buyers}.<br>
+{@code Proto: repeated .com.squareup.cascading2.generated.Person buyers = 2;}
+*/
+    java.util.List<com.squareup.cascading2.generated.Example.Person> 
+        getBuyersList();
+    /**
+Returns the element at {@code index} in {@link #getBuyersList() buyers} .
+*/
+    com.squareup.cascading2.generated.Example.Person getBuyers(int index);
+    /**
+Returns the total number of elements in {@link #getBuyersList() buyers} .
+*/
+    int getBuyersCount();
+    java.util.List<? extends com.squareup.cascading2.generated.Example.PersonOrBuilder> 
+        getBuyersOrBuilderList();
+    com.squareup.cascading2.generated.Example.PersonOrBuilder getBuyersOrBuilder(
+        int index);
+  }
+  /**
+
+*/
+  public static final class Market extends
+      com.google.protobuf.GeneratedMessage
+      implements MarketOrBuilder {
+    // Use Market.newBuilder() to construct.
+    private Market(Builder builder) {
+      super(builder);
+    }
+    private Market(boolean noInit) {}
+    
+    private static final Market defaultInstance;
+    public static Market getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public Market getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Market_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Market_fieldAccessorTable;
+    }
+    
+    // repeated .com.squareup.cascading2.generated.Person sellers = 1;
+    public static final int SELLERS_FIELD_NUMBER = 1;
+    private java.util.List<com.squareup.cascading2.generated.Example.Person> sellers_;
+    public java.util.List<com.squareup.cascading2.generated.Example.Person> getSellersList() {
+      return sellers_;
+    }
+    public java.util.List<? extends com.squareup.cascading2.generated.Example.PersonOrBuilder> 
+        getSellersOrBuilderList() {
+      return sellers_;
+    }
+    public int getSellersCount() {
+      return sellers_.size();
+    }
+    public com.squareup.cascading2.generated.Example.Person getSellers(int index) {
+      return sellers_.get(index);
+    }
+    public com.squareup.cascading2.generated.Example.PersonOrBuilder getSellersOrBuilder(
+        int index) {
+      return sellers_.get(index);
+    }
+    
+    // repeated .com.squareup.cascading2.generated.Person buyers = 2;
+    public static final int BUYERS_FIELD_NUMBER = 2;
+    private java.util.List<com.squareup.cascading2.generated.Example.Person> buyers_;
+    public java.util.List<com.squareup.cascading2.generated.Example.Person> getBuyersList() {
+      return buyers_;
+    }
+    public java.util.List<? extends com.squareup.cascading2.generated.Example.PersonOrBuilder> 
+        getBuyersOrBuilderList() {
+      return buyers_;
+    }
+    public int getBuyersCount() {
+      return buyers_.size();
+    }
+    public com.squareup.cascading2.generated.Example.Person getBuyers(int index) {
+      return buyers_.get(index);
+    }
+    public com.squareup.cascading2.generated.Example.PersonOrBuilder getBuyersOrBuilder(
+        int index) {
+      return buyers_.get(index);
+    }
+    
+    private void initFields() {
+      sellers_ = java.util.Collections.emptyList();
+      buyers_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < sellers_.size(); i++) {
+        output.writeMessage(1, sellers_.get(i));
+      }
+      for (int i = 0; i < buyers_.size(); i++) {
+        output.writeMessage(2, buyers_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      for (int i = 0; i < sellers_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, sellers_.get(i));
+      }
+      for (int i = 0; i < buyers_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, buyers_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.squareup.cascading2.generated.Example.Market parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Market parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Market parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Market parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Market parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Market parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Market parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.squareup.cascading2.generated.Example.Market parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.squareup.cascading2.generated.Example.Market parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Market parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.squareup.cascading2.generated.Example.Market prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.squareup.cascading2.generated.Example.MarketOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Market_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Market_fieldAccessorTable;
+      }
+      
+      // Construct using com.squareup.cascading2.generated.Example.Market.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getSellersFieldBuilder();
+          getBuyersFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (sellersBuilder_ == null) {
+          sellers_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          sellersBuilder_.clear();
+        }
+        if (buyersBuilder_ == null) {
+          buyers_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+        } else {
+          buyersBuilder_.clear();
+        }
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.squareup.cascading2.generated.Example.Market.getDescriptor();
+      }
+      
+      public com.squareup.cascading2.generated.Example.Market getDefaultInstanceForType() {
+        return com.squareup.cascading2.generated.Example.Market.getDefaultInstance();
+      }
+      
+      public com.squareup.cascading2.generated.Example.Market build() {
+        com.squareup.cascading2.generated.Example.Market result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.squareup.cascading2.generated.Example.Market buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.squareup.cascading2.generated.Example.Market result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.squareup.cascading2.generated.Example.Market buildPartial() {
+        com.squareup.cascading2.generated.Example.Market result = new com.squareup.cascading2.generated.Example.Market(this);
+        int from_bitField0_ = bitField0_;
+        if (sellersBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            sellers_ = java.util.Collections.unmodifiableList(sellers_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.sellers_ = sellers_;
+        } else {
+          result.sellers_ = sellersBuilder_.build();
+        }
+        if (buyersBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            buyers_ = java.util.Collections.unmodifiableList(buyers_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.buyers_ = buyers_;
+        } else {
+          result.buyers_ = buyersBuilder_.build();
+        }
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.squareup.cascading2.generated.Example.Market) {
+          return mergeFrom((com.squareup.cascading2.generated.Example.Market)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.squareup.cascading2.generated.Example.Market other) {
+        if (other == com.squareup.cascading2.generated.Example.Market.getDefaultInstance()) return this;
+        if (sellersBuilder_ == null) {
+          if (!other.sellers_.isEmpty()) {
+            if (sellers_.isEmpty()) {
+              sellers_ = other.sellers_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureSellersIsMutable();
+              sellers_.addAll(other.sellers_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.sellers_.isEmpty()) {
+            if (sellersBuilder_.isEmpty()) {
+              sellersBuilder_.dispose();
+              sellersBuilder_ = null;
+              sellers_ = other.sellers_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              sellersBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getSellersFieldBuilder() : null;
+            } else {
+              sellersBuilder_.addAllMessages(other.sellers_);
+            }
+          }
+        }
+        if (buyersBuilder_ == null) {
+          if (!other.buyers_.isEmpty()) {
+            if (buyers_.isEmpty()) {
+              buyers_ = other.buyers_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureBuyersIsMutable();
+              buyers_.addAll(other.buyers_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.buyers_.isEmpty()) {
+            if (buyersBuilder_.isEmpty()) {
+              buyersBuilder_.dispose();
+              buyersBuilder_ = null;
+              buyers_ = other.buyers_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+              buyersBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getBuyersFieldBuilder() : null;
+            } else {
+              buyersBuilder_.addAllMessages(other.buyers_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              com.squareup.cascading2.generated.Example.Person.Builder subBuilder = com.squareup.cascading2.generated.Example.Person.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addSellers(subBuilder.buildPartial());
+              break;
+            }
+            case 18: {
+              com.squareup.cascading2.generated.Example.Person.Builder subBuilder = com.squareup.cascading2.generated.Example.Person.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addBuyers(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // repeated .com.squareup.cascading2.generated.Person sellers = 1;
+      private java.util.List<com.squareup.cascading2.generated.Example.Person> sellers_ =
+        java.util.Collections.emptyList();
+      private void ensureSellersIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          sellers_ = new java.util.ArrayList<com.squareup.cascading2.generated.Example.Person>(sellers_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.squareup.cascading2.generated.Example.Person, com.squareup.cascading2.generated.Example.Person.Builder, com.squareup.cascading2.generated.Example.PersonOrBuilder> sellersBuilder_;
+      
+      public java.util.List<com.squareup.cascading2.generated.Example.Person> getSellersList() {
+        if (sellersBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(sellers_);
+        } else {
+          return sellersBuilder_.getMessageList();
+        }
+      }
+      public int getSellersCount() {
+        if (sellersBuilder_ == null) {
+          return sellers_.size();
+        } else {
+          return sellersBuilder_.getCount();
+        }
+      }
+      public com.squareup.cascading2.generated.Example.Person getSellers(int index) {
+        if (sellersBuilder_ == null) {
+          return sellers_.get(index);
+        } else {
+          return sellersBuilder_.getMessage(index);
+        }
+      }
+      /**
+Sets a new value at {@code index} in {@link #getSellersList() sellers} .
+*/
+      public Builder setSellers(
+          int index, com.squareup.cascading2.generated.Example.Person value) {
+        if (sellersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureSellersIsMutable();
+          sellers_.set(index, value);
+          onChanged();
+        } else {
+          sellersBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+Sets a new value at {@code index} in {@link #getSellersList() sellers} .
+*/
+      public Builder setSellers(
+          int index, com.squareup.cascading2.generated.Example.Person.Builder builderForValue) {
+        if (sellersBuilder_ == null) {
+          ensureSellersIsMutable();
+          sellers_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          sellersBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+Adds a new value to {@link #getSellersList() sellers} .
+*/
+      public Builder addSellers(com.squareup.cascading2.generated.Example.Person value) {
+        if (sellersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureSellersIsMutable();
+          sellers_.add(value);
+          onChanged();
+        } else {
+          sellersBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+Adds a new value to {@link #getSellersList() sellers} .
+*/
+      public Builder addSellers(
+          int index, com.squareup.cascading2.generated.Example.Person value) {
+        if (sellersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureSellersIsMutable();
+          sellers_.add(index, value);
+          onChanged();
+        } else {
+          sellersBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+Adds a new value to {@link #getSellersList() sellers} .
+*/
+      public Builder addSellers(
+          com.squareup.cascading2.generated.Example.Person.Builder builderForValue) {
+        if (sellersBuilder_ == null) {
+          ensureSellersIsMutable();
+          sellers_.add(builderForValue.build());
+          onChanged();
+        } else {
+          sellersBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+Adds a new value to {@link #getSellersList() sellers} .
+*/
+      public Builder addSellers(
+          int index, com.squareup.cascading2.generated.Example.Person.Builder builderForValue) {
+        if (sellersBuilder_ == null) {
+          ensureSellersIsMutable();
+          sellers_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          sellersBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+Adds all {@code values} to {@link #getSellersList() sellers} .
+*/
+      public Builder addAllSellers(
+          java.lang.Iterable<? extends com.squareup.cascading2.generated.Example.Person> values) {
+        if (sellersBuilder_ == null) {
+          ensureSellersIsMutable();
+          super.addAll(values, sellers_);
+          onChanged();
+        } else {
+          sellersBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+Clears the {@link #getSellersList() sellers}  field.
+*/
+      public Builder clearSellers() {
+        if (sellersBuilder_ == null) {
+          sellers_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          sellersBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+Removes the value at {@code index} in {@link #getSellersList() sellers} .
+*/
+      public Builder removeSellers(int index) {
+        if (sellersBuilder_ == null) {
+          ensureSellersIsMutable();
+          sellers_.remove(index);
+          onChanged();
+        } else {
+          sellersBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.squareup.cascading2.generated.Example.Person.Builder getSellersBuilder(
+          int index) {
+        return getSellersFieldBuilder().getBuilder(index);
+      }
+      public com.squareup.cascading2.generated.Example.PersonOrBuilder getSellersOrBuilder(
+          int index) {
+        if (sellersBuilder_ == null) {
+          return sellers_.get(index);  } else {
+          return sellersBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.squareup.cascading2.generated.Example.PersonOrBuilder> 
+           getSellersOrBuilderList() {
+        if (sellersBuilder_ != null) {
+          return sellersBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(sellers_);
+        }
+      }
+      public com.squareup.cascading2.generated.Example.Person.Builder addSellersBuilder() {
+        return getSellersFieldBuilder().addBuilder(
+            com.squareup.cascading2.generated.Example.Person.getDefaultInstance());
+      }
+      public com.squareup.cascading2.generated.Example.Person.Builder addSellersBuilder(
+          int index) {
+        return getSellersFieldBuilder().addBuilder(
+            index, com.squareup.cascading2.generated.Example.Person.getDefaultInstance());
+      }
+      public java.util.List<com.squareup.cascading2.generated.Example.Person.Builder> 
+           getSellersBuilderList() {
+        return getSellersFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.squareup.cascading2.generated.Example.Person, com.squareup.cascading2.generated.Example.Person.Builder, com.squareup.cascading2.generated.Example.PersonOrBuilder> 
+          getSellersFieldBuilder() {
+        if (sellersBuilder_ == null) {
+          sellersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.squareup.cascading2.generated.Example.Person, com.squareup.cascading2.generated.Example.Person.Builder, com.squareup.cascading2.generated.Example.PersonOrBuilder>(
+                  sellers_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          sellers_ = null;
+        }
+        return sellersBuilder_;
+      }
+      
+      // repeated .com.squareup.cascading2.generated.Person buyers = 2;
+      private java.util.List<com.squareup.cascading2.generated.Example.Person> buyers_ =
+        java.util.Collections.emptyList();
+      private void ensureBuyersIsMutable() {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+          buyers_ = new java.util.ArrayList<com.squareup.cascading2.generated.Example.Person>(buyers_);
+          bitField0_ |= 0x00000002;
+         }
+      }
+      
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.squareup.cascading2.generated.Example.Person, com.squareup.cascading2.generated.Example.Person.Builder, com.squareup.cascading2.generated.Example.PersonOrBuilder> buyersBuilder_;
+      
+      public java.util.List<com.squareup.cascading2.generated.Example.Person> getBuyersList() {
+        if (buyersBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(buyers_);
+        } else {
+          return buyersBuilder_.getMessageList();
+        }
+      }
+      public int getBuyersCount() {
+        if (buyersBuilder_ == null) {
+          return buyers_.size();
+        } else {
+          return buyersBuilder_.getCount();
+        }
+      }
+      public com.squareup.cascading2.generated.Example.Person getBuyers(int index) {
+        if (buyersBuilder_ == null) {
+          return buyers_.get(index);
+        } else {
+          return buyersBuilder_.getMessage(index);
+        }
+      }
+      /**
+Sets a new value at {@code index} in {@link #getBuyersList() buyers} .
+*/
+      public Builder setBuyers(
+          int index, com.squareup.cascading2.generated.Example.Person value) {
+        if (buyersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBuyersIsMutable();
+          buyers_.set(index, value);
+          onChanged();
+        } else {
+          buyersBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+Sets a new value at {@code index} in {@link #getBuyersList() buyers} .
+*/
+      public Builder setBuyers(
+          int index, com.squareup.cascading2.generated.Example.Person.Builder builderForValue) {
+        if (buyersBuilder_ == null) {
+          ensureBuyersIsMutable();
+          buyers_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          buyersBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+Adds a new value to {@link #getBuyersList() buyers} .
+*/
+      public Builder addBuyers(com.squareup.cascading2.generated.Example.Person value) {
+        if (buyersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBuyersIsMutable();
+          buyers_.add(value);
+          onChanged();
+        } else {
+          buyersBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+Adds a new value to {@link #getBuyersList() buyers} .
+*/
+      public Builder addBuyers(
+          int index, com.squareup.cascading2.generated.Example.Person value) {
+        if (buyersBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureBuyersIsMutable();
+          buyers_.add(index, value);
+          onChanged();
+        } else {
+          buyersBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+Adds a new value to {@link #getBuyersList() buyers} .
+*/
+      public Builder addBuyers(
+          com.squareup.cascading2.generated.Example.Person.Builder builderForValue) {
+        if (buyersBuilder_ == null) {
+          ensureBuyersIsMutable();
+          buyers_.add(builderForValue.build());
+          onChanged();
+        } else {
+          buyersBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+Adds a new value to {@link #getBuyersList() buyers} .
+*/
+      public Builder addBuyers(
+          int index, com.squareup.cascading2.generated.Example.Person.Builder builderForValue) {
+        if (buyersBuilder_ == null) {
+          ensureBuyersIsMutable();
+          buyers_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          buyersBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+Adds all {@code values} to {@link #getBuyersList() buyers} .
+*/
+      public Builder addAllBuyers(
+          java.lang.Iterable<? extends com.squareup.cascading2.generated.Example.Person> values) {
+        if (buyersBuilder_ == null) {
+          ensureBuyersIsMutable();
+          super.addAll(values, buyers_);
+          onChanged();
+        } else {
+          buyersBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+Clears the {@link #getBuyersList() buyers}  field.
+*/
+      public Builder clearBuyers() {
+        if (buyersBuilder_ == null) {
+          buyers_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+        } else {
+          buyersBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+Removes the value at {@code index} in {@link #getBuyersList() buyers} .
+*/
+      public Builder removeBuyers(int index) {
+        if (buyersBuilder_ == null) {
+          ensureBuyersIsMutable();
+          buyers_.remove(index);
+          onChanged();
+        } else {
+          buyersBuilder_.remove(index);
+        }
+        return this;
+      }
+      public com.squareup.cascading2.generated.Example.Person.Builder getBuyersBuilder(
+          int index) {
+        return getBuyersFieldBuilder().getBuilder(index);
+      }
+      public com.squareup.cascading2.generated.Example.PersonOrBuilder getBuyersOrBuilder(
+          int index) {
+        if (buyersBuilder_ == null) {
+          return buyers_.get(index);  } else {
+          return buyersBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      public java.util.List<? extends com.squareup.cascading2.generated.Example.PersonOrBuilder> 
+           getBuyersOrBuilderList() {
+        if (buyersBuilder_ != null) {
+          return buyersBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(buyers_);
+        }
+      }
+      public com.squareup.cascading2.generated.Example.Person.Builder addBuyersBuilder() {
+        return getBuyersFieldBuilder().addBuilder(
+            com.squareup.cascading2.generated.Example.Person.getDefaultInstance());
+      }
+      public com.squareup.cascading2.generated.Example.Person.Builder addBuyersBuilder(
+          int index) {
+        return getBuyersFieldBuilder().addBuilder(
+            index, com.squareup.cascading2.generated.Example.Person.getDefaultInstance());
+      }
+      public java.util.List<com.squareup.cascading2.generated.Example.Person.Builder> 
+           getBuyersBuilderList() {
+        return getBuyersFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          com.squareup.cascading2.generated.Example.Person, com.squareup.cascading2.generated.Example.Person.Builder, com.squareup.cascading2.generated.Example.PersonOrBuilder> 
+          getBuyersFieldBuilder() {
+        if (buyersBuilder_ == null) {
+          buyersBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              com.squareup.cascading2.generated.Example.Person, com.squareup.cascading2.generated.Example.Person.Builder, com.squareup.cascading2.generated.Example.PersonOrBuilder>(
+                  buyers_,
+                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  getParentForChildren(),
+                  isClean());
+          buyers_ = null;
+        }
+        return buyersBuilder_;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.squareup.cascading2.generated.Market)
+    }
+    
+    static {
+      defaultInstance = new Market(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.squareup.cascading2.generated.Market)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_squareup_cascading2_generated_Person_descriptor;
   private static
@@ -1635,6 +2534,11 @@ Removes the value at {@code index} in {@link #getSilentList() silent} .
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_squareup_cascading2_generated_Partnership_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_squareup_cascading2_generated_Market_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_squareup_cascading2_generated_Market_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1654,7 +2558,10 @@ Removes the value at {@code index} in {@link #getSilentList() silent} .
       "2.generated.Person\022;\n\010follower\030\002 \001(\0132).c" +
       "om.squareup.cascading2.generated.Person\022" +
       "9\n\006silent\030\003 \003(\0132).com.squareup.cascading",
-      "2.generated.Person"
+      "2.generated.Person\"\177\n\006Market\022:\n\007sellers\030" +
+      "\001 \003(\0132).com.squareup.cascading2.generate" +
+      "d.Person\0229\n\006buyers\030\002 \003(\0132).com.squareup." +
+      "cascading2.generated.Person"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -1677,6 +2584,14 @@ Removes the value at {@code index} in {@link #getSilentList() silent} .
               new java.lang.String[] { "Leader", "Follower", "Silent", },
               com.squareup.cascading2.generated.Example.Partnership.class,
               com.squareup.cascading2.generated.Example.Partnership.Builder.class);
+          internal_static_com_squareup_cascading2_generated_Market_descriptor =
+            getDescriptor().getMessageTypes().get(2);
+          internal_static_com_squareup_cascading2_generated_Market_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_squareup_cascading2_generated_Market_descriptor,
+              new java.lang.String[] { "Sellers", "Buyers", },
+              com.squareup.cascading2.generated.Example.Market.class,
+              com.squareup.cascading2.generated.Example.Market.Builder.class);
           return null;
         }
       };

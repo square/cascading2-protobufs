@@ -15,12 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ExpandProto<T extends Message> extends BaseOperation implements Function {
-  private final String messageClassName;
+  protected final String messageClassName;
   private final String[] fieldsToExtract;
 
   private transient Descriptors.FieldDescriptor[] fieldDescriptorsToExtract;
 
-  private static <T extends Message> String[] getAllFields(Class<T> messageClass) {
+  protected static <T extends Message> String[] getAllFields(Class<T> messageClass) {
     try {
       Method m = messageClass.getMethod("newBuilder");
       Message.Builder builder = (Message.Builder) m.invoke(new Object[]{});
@@ -120,7 +120,7 @@ public class ExpandProto<T extends Message> extends BaseOperation implements Fun
     functionCall.getOutputCollector().add(result);
   }
 
-  private Descriptors.FieldDescriptor[] getFieldDescriptorsToExtract() {
+  protected Descriptors.FieldDescriptor[] getFieldDescriptorsToExtract() {
     if (fieldDescriptorsToExtract == null) {
       Message.Builder builder = Util.builderFromMessageClass(messageClassName);
 
