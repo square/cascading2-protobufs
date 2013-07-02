@@ -3,6 +3,7 @@ package com.squareup.cascading2.function;
 import cascading.flow.hadoop.HadoopFlowProcess;
 import cascading.operation.Function;
 import cascading.operation.FunctionCall;
+import cascading.pipe.Pipe;
 import cascading.tuple.Fields;
 import cascading.tuple.Tuple;
 import cascading.tuple.TupleEntry;
@@ -75,12 +76,18 @@ public class ExtractProtoTest extends TestCase {
   }
 
   public void testEnum() throws Exception {
-    assertEquals(new Tuple("Jack", "jack@", Example.Person.Position.CEO),
+    assertEquals(new Tuple("Jack", "jack@", Example.Person.Position.CEO.getNumber()),
         exec(new ExtractProto(Example.Partnership.class, "leader.name", "leader.email", "leader.position"), new Tuple(P3)));
   }
 
+//  public void testInFlow() throws Exception {
+//    Pipe p = new Pipe("input");
+//    p = new Pipe()
+//  }
+
   private static Tuple exec(Function f, final Tuple input) {
     final AtomicReference<Tuple> output = new AtomicReference<Tuple>();
+    f.prepare(new HadoopFlowProcess(), null);
 
     f.operate(new HadoopFlowProcess(), new FunctionCall() {
       @Override public TupleEntry getArguments() {

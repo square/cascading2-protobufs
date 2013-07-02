@@ -4,6 +4,7 @@ import cascading.flow.FlowProcess;
 import cascading.operation.BaseOperation;
 import cascading.operation.Function;
 import cascading.operation.FunctionCall;
+import cascading.operation.OperationCall;
 import cascading.tuple.Fields;
 import cascading.tuple.Tuple;
 import com.google.protobuf.Descriptors;
@@ -20,11 +21,14 @@ import java.util.List;
  * Repeated fields are NOT supported with this function.
  */
 public class ExtractProto extends BaseOperation implements Function {
-  private final List<List<Descriptors.FieldDescriptor>> paths;
+  private final String messageClassName;
+  private transient List<List<Descriptors.FieldDescriptor>> paths;
+  private final String[] stringPaths;
 
   public ExtractProto(Class<? extends Message> messageClass, String... paths) {
     super(1, deriveFieldNames(paths));
-    this.paths = new ArrayList<List<Descriptors.FieldDescriptor>>();
+    stringPaths = paths;
+    messageClassName = messageClass.getName();
 
     for (String path : paths) {
       String[] segments = path.split("\\.");
@@ -58,14 +62,52 @@ public class ExtractProto extends BaseOperation implements Function {
         throw new IllegalArgumentException("Cannot extract repeated field " + lastSegment
             + " in struct " + cur.getName() +". Full path: " + path);
       }
-
-      descriptors.add(lastFieldDesc);
-      this.paths.add(descriptors);
     }
   }
 
   private static Fields deriveFieldNames(String[] paths) {
     return new Fields(paths);
+  }
+
+  @Override
+  public void prepare(FlowProcess flowProcess, OperationCall operationCall) {
+    this.paths = new ArrayList<List<Descriptors.FieldDescriptor>>();
+
+    for (String path : stringPaths) {
+      String[] segments = path.split("\\.");
+
+      Descriptors.Descriptor cur = Util.builderFromMessageClass(messageClassName).getDescriptorForType();
+
+      List<Descriptors.FieldDescriptor> descriptors = new ArrayList<Descriptors.FieldDescriptor>();
+
+      for (int i = 0; i < segments.length - 1; i++) {
+        Descriptors.FieldDescriptor fieldDesc = cur.findFieldByName(segments[i]);
+        if (fieldDesc == null) {
+          throw new IllegalArgumentException("Can't find a field named " + segments[i]
+              + " in struct " + cur.getName() +". Full path: " + path);
+        }
+        if (fieldDesc.isRepeated()) {
+          throw new IllegalArgumentException("Cannot extract through repeated field " + segments[i]
+              + " in struct " + cur.getName() +". Full path: " + path);
+        }
+        descriptors.add(fieldDesc);
+        cur = fieldDesc.getMessageType();
+      }
+
+      String lastSegment = segments[segments.length - 1];
+      Descriptors.FieldDescriptor lastFieldDesc = cur.findFieldByName(lastSegment);
+      if (lastFieldDesc == null) {
+        throw new IllegalArgumentException("Can't find a field named " + lastSegment
+            + " in struct " + cur.getName() +". Full path: " + path);
+      }
+      if (lastFieldDesc.isRepeated()) {
+        throw new IllegalArgumentException("Cannot extract repeated field " + lastSegment
+            + " in struct " + cur.getName() +". Full path: " + path);
+      }
+
+      descriptors.add(lastFieldDesc);
+      this.paths.add(descriptors);
+    }
   }
 
   @Override public void operate(FlowProcess flowProcess, FunctionCall functionCall) {
@@ -98,7 +140,12 @@ public class ExtractProto extends BaseOperation implements Function {
 
       // we've advanced cur all the way to the last Message in the path. the last path element
       // refers to the value, so let's just get what we need from the Message.
-      t.add(cur.getField(fieldDescPath.get(fieldDescPath.size()-1)));
+      Descriptors.FieldDescriptor desc = fieldDescPath.get(fieldDescPath.size() - 1);
+      if (desc.getJavaType() == Descriptors.FieldDescriptor.JavaType.ENUM) {
+        t.add(((Descriptors.EnumValueDescriptor)cur.getField(desc)).getNumber());
+      } else {
+        t.add(cur.getField(desc));
+      }
     }
 
     // yield the final tuple
