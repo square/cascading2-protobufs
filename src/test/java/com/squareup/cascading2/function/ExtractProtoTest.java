@@ -83,6 +83,11 @@ public class ExtractProtoTest extends TestCase {
         exec(new ExtractProto(Example.Partnership.class, "follower.name", "follower.email", "leader.name", "leader.email"), new Tuple(P2)));
   }
 
+  public void testMissingLeaves() throws Exception {
+    assertEquals(new Tuple(null, null),
+        exec(new ExtractProto(Example.Partnership.class, "leader.id", "leader.position"), new Tuple(P2)));
+  }
+
   public void testEnum() throws Exception {
     assertEquals(new Tuple("Jack", "jack@", Example.Person.Position.CEO.getNumber()),
         exec(new ExtractProto(Example.Partnership.class, "leader.name", "leader.email", "leader.position"), new Tuple(P3)));

@@ -141,10 +141,14 @@ public class ExtractProto extends BaseOperation implements Function {
       // we've advanced cur all the way to the last Message in the path. the last path element
       // refers to the value, so let's just get what we need from the Message.
       Descriptors.FieldDescriptor desc = fieldDescPath.get(fieldDescPath.size() - 1);
-      if (desc.getJavaType() == Descriptors.FieldDescriptor.JavaType.ENUM) {
-        t.add(((Descriptors.EnumValueDescriptor)cur.getField(desc)).getNumber());
+      if (cur.hasField(desc)) {
+        if (desc.getJavaType() == Descriptors.FieldDescriptor.JavaType.ENUM) {
+          t.add(((Descriptors.EnumValueDescriptor)cur.getField(desc)).getNumber());
+        } else {
+          t.add(cur.getField(desc));
+        }
       } else {
-        t.add(cur.getField(desc));
+        t.add(null);
       }
     }
 
