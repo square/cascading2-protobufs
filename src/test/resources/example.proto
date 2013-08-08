@@ -17,3 +17,8 @@ message Partnership {
   optional Person follower = 2;
   repeated Person silent = 3;
 }
+
+message Market {
+  repeated Person sellers = 1;
+  repeated Person buyers = 2;
+}

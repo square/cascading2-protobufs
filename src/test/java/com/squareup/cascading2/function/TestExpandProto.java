@@ -54,14 +54,14 @@ public class TestExpandProto extends TestCase {
   }
 
   public void testNested() throws Exception {
-    ExpandProto allFields = new ExpandProto(Example.Partnership.class);
+    ExpandProto allFields = new ExpandProto(Example.Partnership.class, "leader", "follower");
     List<Tuple> results = operateFunction(allFields, new TupleEntry(new Fields("value"), new Tuple(
         Example.Partnership
             .newBuilder()
             .setLeader(BRYAN)
             .setFollower(LUCAS)
             .build())));
-    assertEquals(new Tuple(BRYAN.build(), LUCAS.build(), null), results.get(0));
+    assertEquals(new Tuple(BRYAN.build(), LUCAS.build()), results.get(0));
 
     results = operateFunction(new ExpandProto(Example.Partnership.class, "leader"),
         new TupleEntry(new Fields("value"), new Tuple(Example.Partnership
@@ -73,17 +73,11 @@ public class TestExpandProto extends TestCase {
   }
 
   public void testRepeated() throws Exception {
-    ExpandProto allFields = new ExpandProto(Example.Partnership.class);
-    List<Tuple> results = operateFunction(allFields, new TupleEntry(new Fields("value"), new Tuple(
-        Example.Partnership
-            .newBuilder()
-            .setLeader(BRYAN)
-            .setFollower(LUCAS)
-            .addSilent(TOM)
-            .addSilent(DICK)
-            .addSilent(HARRY)
-            .build())));
-    assertEquals(new Tuple(BRYAN.build(), LUCAS.build(), TOM.build()), results.get(0));
+    try {
+      new ExpandProto(Example.Partnership.class, "silent");
+    } catch(IllegalArgumentException e) {
+      // ok
+    }
   }
 
   public void testConstructorErrorCases() throws Exception {
@@ -178,7 +172,7 @@ public class TestExpandProto extends TestCase {
     assertEquals(new Tuple(25, 2, "lucas", null, null).toString(), results.get(1).toString());
   }
 
-  private static List<Tuple> operateFunction(Function func, final TupleEntry argument) {
+  protected static List<Tuple> operateFunction(Function func, final TupleEntry argument) {
     final List<Tuple> results = new ArrayList<Tuple>();
     func.operate(null, new FunctionCall() {
       @Override public TupleEntry getArguments() {
