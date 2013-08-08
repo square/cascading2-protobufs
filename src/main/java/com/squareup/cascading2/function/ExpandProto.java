@@ -20,7 +20,7 @@ public class ExpandProto<T extends Message> extends BaseOperation implements Fun
 
   private transient Descriptors.FieldDescriptor[] fieldDescriptorsToExtract;
 
-  private static <T extends Message> String[] getAllFields(Class<T> messageClass) {
+  protected static <T extends Message> String[] getAllFields(Class<T> messageClass) {
     try {
       Method m = messageClass.getMethod("newBuilder");
       Message.Builder builder = (Message.Builder) m.invoke(new Object[]{});
@@ -74,13 +74,16 @@ public class ExpandProto<T extends Message> extends BaseOperation implements Fun
 
     Message.Builder builder = Util.builderFromMessageClass(messageClass.getName());
 
-    List <Descriptors.FieldDescriptor> fieldDescriptors = new ArrayList<Descriptors.FieldDescriptor>();
     for (int i = 0; i < fieldsToExtract.length; i++) {
-      if (builder.getDescriptorForType().findFieldByName(fieldsToExtract[i]) == null) {
+      Descriptors.FieldDescriptor field = builder.getDescriptorForType().findFieldByName(fieldsToExtract[i]);
+      if (field == null) {
         throw new IllegalArgumentException("Could not find a field named '"
             + fieldsToExtract[i]
             + "' in message class "
             + messageClass.getName());
+      } else if (field.isRepeated()) {
+        throw new IllegalArgumentException("field "  + fieldsToExtract[i]
+            + " is repeated. Please use ExpandRepeatedProto instead.");
       }
     }
 
@@ -95,16 +98,11 @@ public class ExpandProto<T extends Message> extends BaseOperation implements Fun
     }
     Tuple result = new Tuple();
 
-    for (Descriptors.FieldDescriptor fieldDescriptor : getFieldDescriptorsToExtract()) {
+    fieldDescriptorsToExtract = getFieldDescriptorsToExtract(fieldDescriptorsToExtract, messageClassName, fieldsToExtract);
+    for (Descriptors.FieldDescriptor fieldDescriptor : fieldDescriptorsToExtract) {
       Object fieldValue = null;
-      if (fieldDescriptor.isRepeated()) {
-        if (arg.getRepeatedFieldCount(fieldDescriptor) > 0) {
-          fieldValue = arg.getRepeatedField(fieldDescriptor, 0);
-        }
-      } else {
-        if (arg.hasField(fieldDescriptor)) {
-          fieldValue = arg.getField(fieldDescriptor);
-        }
+      if (arg.hasField(fieldDescriptor)) {
+        fieldValue = arg.getField(fieldDescriptor);
       }
       if (fieldValue != null) {
         if (fieldDescriptor.getJavaType() == Descriptors.FieldDescriptor.JavaType.ENUM) {
@@ -120,7 +118,10 @@ public class ExpandProto<T extends Message> extends BaseOperation implements Fun
     functionCall.getOutputCollector().add(result);
   }
 
-  private Descriptors.FieldDescriptor[] getFieldDescriptorsToExtract() {
+  protected static Descriptors.FieldDescriptor[] getFieldDescriptorsToExtract(
+      Descriptors.FieldDescriptor[] fieldDescriptorsToExtract,
+      String messageClassName,
+      String[] fieldsToExtract) {
     if (fieldDescriptorsToExtract == null) {
       Message.Builder builder = Util.builderFromMessageClass(messageClassName);
 
