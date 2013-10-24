@@ -8,6 +8,7 @@ import cascading.tap.Tap;
 import cascading.tuple.Fields;
 import cascading.tuple.Tuple;
 import cascading.tuple.TupleEntry;
+import com.google.protobuf.ExtensionRegistryLite;
 import com.google.protobuf.Message;
 import com.squareup.cascading2.util.Util;
 import java.io.ByteArrayOutputStream;
@@ -27,11 +28,17 @@ public class ProtobufScheme extends SequenceFile {
   private transient Message.Builder prototype;
   private final String fieldName;
   private final String messageClassName;
+  private final ExtensionRegistryLite registry;
 
   public ProtobufScheme(String fieldName, Class<? extends Message> messageClass) {
+    this(fieldName, messageClass, null);
+  }
+
+  public ProtobufScheme(String fieldName, Class<? extends Message> messageClass, ExtensionRegistryLite registry) {
     super(new Fields(fieldName));
     this.fieldName = fieldName;
     messageClassName = messageClass.getName();
+    this.registry = registry;
   }
 
   @Override public void sourcePrepare(FlowProcess<JobConf> flowProcess,
@@ -61,7 +68,11 @@ public class ProtobufScheme extends SequenceFile {
 
     Message.Builder builder = getPrototype();
     builder.clear();
-    tuple.add(builder.mergeFrom(value.getBytes(), 0, value.getLength()).build());
+    if (registry != null) {
+      tuple.add(builder.mergeFrom(value.getBytes(), 0, value.getLength(), registry).build());
+    } else {
+      tuple.add(builder.mergeFrom(value.getBytes(), 0, value.getLength()).build());
+    }
 
     return true;
   }
