@@ -9,6 +9,7 @@ import cascading.tuple.Fields;
 import cascading.tuple.Tuple;
 import com.google.protobuf.Descriptors;
 import com.google.protobuf.Message;
+import com.squareup.cascading2.util.ExtensionSupport;
 import com.squareup.cascading2.util.Util;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +25,17 @@ public class ExtractProto extends BaseOperation implements Function {
   private final String messageClassName;
   private transient List<List<Descriptors.FieldDescriptor>> paths;
   private final String[] stringPaths;
+  private final ExtensionSupport extensionSupport;
 
   public ExtractProto(Class<? extends Message> messageClass, String... paths) {
+    this(messageClass, ExtensionSupport.NONE, paths);
+  }
+
+  public ExtractProto(Class<? extends Message> messageClass, ExtensionSupport extensionSupport, String... paths) {
     super(1, deriveFieldNames(paths));
     stringPaths = paths;
     messageClassName = messageClass.getName();
+    this.extensionSupport = extensionSupport;
 
     for (String path : paths) {
       String[] segments = path.split("\\.");
@@ -39,7 +46,7 @@ public class ExtractProto extends BaseOperation implements Function {
       List<Descriptors.FieldDescriptor> descriptors = new ArrayList<Descriptors.FieldDescriptor>();
 
       for (int i = 0; i < segments.length - 1; i++) {
-        Descriptors.FieldDescriptor fieldDesc = cur.findFieldByName(segments[i]);
+        Descriptors.FieldDescriptor fieldDesc = Util.findFieldByName(segments[i], extensionSupport.getAllFieldsForMessage(cur));
         if (fieldDesc == null) {
           throw new IllegalArgumentException("Can't find a field named " + segments[i]
               + " in struct " + cur.getName() +". Full path: " + path);
@@ -53,7 +60,7 @@ public class ExtractProto extends BaseOperation implements Function {
       }
 
       String lastSegment = segments[segments.length - 1];
-      Descriptors.FieldDescriptor lastFieldDesc = cur.findFieldByName(lastSegment);
+      Descriptors.FieldDescriptor lastFieldDesc = Util.findFieldByName(lastSegment, extensionSupport.getAllFieldsForMessage(cur));
       if (lastFieldDesc == null) {
         throw new IllegalArgumentException("Can't find a field named " + lastSegment
             + " in struct " + cur.getName() +". Full path: " + path);
@@ -81,7 +88,7 @@ public class ExtractProto extends BaseOperation implements Function {
       List<Descriptors.FieldDescriptor> descriptors = new ArrayList<Descriptors.FieldDescriptor>();
 
       for (int i = 0; i < segments.length - 1; i++) {
-        Descriptors.FieldDescriptor fieldDesc = cur.findFieldByName(segments[i]);
+        Descriptors.FieldDescriptor fieldDesc = Util.findFieldByName(segments[i], extensionSupport.getAllFieldsForMessage(cur));
         if (fieldDesc == null) {
           throw new IllegalArgumentException("Can't find a field named " + segments[i]
               + " in struct " + cur.getName() +". Full path: " + path);
@@ -95,7 +102,7 @@ public class ExtractProto extends BaseOperation implements Function {
       }
 
       String lastSegment = segments[segments.length - 1];
-      Descriptors.FieldDescriptor lastFieldDesc = cur.findFieldByName(lastSegment);
+      Descriptors.FieldDescriptor lastFieldDesc = Util.findFieldByName(lastSegment, extensionSupport.getAllFieldsForMessage(cur));
       if (lastFieldDesc == null) {
         throw new IllegalArgumentException("Can't find a field named " + lastSegment
             + " in struct " + cur.getName() +". Full path: " + path);

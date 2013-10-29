@@ -21,6 +21,9 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 
+import static com.squareup.cascading2.function.TestExtensionSupport.DRINK_EXTENSIONS;
+import static com.squareup.cascading2.function.TestExtensionSupport.TEA_DRINK;
+
 public class ExtractProtoTest extends TestCase {
   private static final Example.Partnership P1 = Example.Partnership.newBuilder()
       .setFollower(Example.Person.newBuilder()
@@ -76,6 +79,10 @@ public class ExtractProtoTest extends TestCase {
   public void testAllPresent() throws Exception {
     assertEquals(new Tuple("Andy", "andy@", "Bryan", "bryan@"),
         exec(new ExtractProto(Example.Partnership.class, "follower.name", "follower.email", "leader.name", "leader.email"), new Tuple(P1)));
+  }
+
+  public void testExtension() throws Exception {
+    assertEquals(new Tuple(true), exec(new ExtractProto(Example.Drink.class, DRINK_EXTENSIONS, "tea.milk"), new Tuple(TEA_DRINK)));
   }
 
   public void testSomePresent() throws Exception {
