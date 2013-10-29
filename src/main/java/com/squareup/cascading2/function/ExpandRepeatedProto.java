@@ -143,12 +143,18 @@ public class ExpandRepeatedProto <T extends Message> extends BaseOperation imple
     }
 
     Descriptors.FieldDescriptor repeatedField = fieldDescriptorsToExtract[repeatedFieldIndex];
-    for (Object value : (List<Object>) arg.getField(repeatedField)) {
-      Tuple copy = new Tuple(prototypeTuple);
-      copy.set(repeatedFieldIndex, value);
+    List<Object> repeatedValues = (List<Object>) arg.getField(repeatedField);
 
-      functionCall.getOutputCollector().add(copy);
+    if (repeatedValues.size() == 0) {
+      // If there are no copies of the repeated field, return at least one copy of the tuple.
+      functionCall.getOutputCollector().add(prototypeTuple);
+    } else {
+      for (Object value : repeatedValues) {
+        Tuple copy = new Tuple(prototypeTuple);
+        copy.set(repeatedFieldIndex, value);
+
+        functionCall.getOutputCollector().add(copy);
+      }
     }
-
   }
 }
