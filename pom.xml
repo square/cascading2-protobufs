@@ -29,7 +29,7 @@
 
     <name>cascading2-protobuf</name>
     <description>A set of libraries for working with Protocol Buffers objects in Cascading 2</description>
-    <url>https://github.com/bryanduxbury/cascading2-protobuf</url>
+    <url>https://github.com/square/cascading2-protobuf</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -40,9 +40,9 @@
     </properties>
 
     <scm>
-        <url>https://github.com/bryanduxbury/cascading2-protobuf</url>
-        <connection>scm:git:https://github.com/bryanduxbury/cascading2-protobuf</connection>
-        <developerConnection>scm:git:git@github.com:bryanduxbury/cascading2-protobuf.git</developerConnection>
+        <url>https://github.com/square/cascading2-protobuf</url>
+        <connection>scm:git:https://github.com/square/cascading2-protobuf</connection>
+        <developerConnection>scm:git:git@github.com:square/cascading2-protobuf.git</developerConnection>
     </scm>
 
     <licenses>
