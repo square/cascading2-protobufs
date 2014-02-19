@@ -6,18 +6,17 @@ import cascading.tuple.hadoop.io.BufferedInputStream;
 import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.Message;
 import com.squareup.cascading2.util.Util;
+import org.apache.hadoop.conf.Configured;
+import org.apache.hadoop.io.WritableComparator;
+import org.apache.hadoop.io.serializer.Deserializer;
+import org.apache.hadoop.io.serializer.Serialization;
+import org.apache.hadoop.io.serializer.Serializer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Comparator;
-import org.apache.hadoop.conf.Configured;
-import org.apache.hadoop.io.WritableComparator;
-import org.apache.hadoop.io.serializer.Deserializer;
-import org.apache.hadoop.io.serializer.Serialization;
-import org.apache.hadoop.io.serializer.Serializer;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class ProtobufSerialization<T extends Message> extends Configured implements Serialization<T>,
     Comparison<T> {
