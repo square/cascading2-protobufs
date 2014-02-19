@@ -1,8 +1,12 @@
 package com.squareup.cascading2.serialization;
 
 import cascading.tuple.Comparison;
+import cascading.tuple.StreamComparator;
+import cascading.tuple.hadoop.io.BufferedInputStream;
+import com.google.protobuf.CodedInputStream;
 import com.google.protobuf.Message;
 import com.squareup.cascading2.util.Util;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,6 +17,7 @@ import org.apache.hadoop.io.WritableComparator;
 import org.apache.hadoop.io.serializer.Deserializer;
 import org.apache.hadoop.io.serializer.Serialization;
 import org.apache.hadoop.io.serializer.Serializer;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class ProtobufSerialization<T extends Message> extends Configured implements Serialization<T>,
     Comparison<T> {
@@ -72,7 +77,7 @@ public class ProtobufSerialization<T extends Message> extends Configured impleme
     }
   }
 
-  private static class ProtobufComparator<T extends Message> implements Comparator<T> {
+  private static class ProtobufComparator<T extends Message> implements Comparator<T>, StreamComparator<BufferedInputStream> {
     @Override public int compare(T message, T message1) {
       try {
         ByteArrayOutputStream baos1 = new ByteArrayOutputStream();
@@ -84,6 +89,27 @@ public class ProtobufSerialization<T extends Message> extends Configured impleme
         byte[] b1 = baos1.toByteArray();
         byte[] b2 = baos2.toByteArray();
         return WritableComparator.compareBytes(b1, 0, b1.length, b2, 0, b2.length);
+      } catch (IOException e) {
+        throw new RuntimeException(e);
+      }
+    }
+
+    @Override
+    public int compare(BufferedInputStream lhs, BufferedInputStream rhs) {
+      CodedInputStream clhs = CodedInputStream.newInstance(lhs);
+      CodedInputStream crhs = CodedInputStream.newInstance(rhs);
+
+      try {
+        int lhsLen = clhs.readRawVarint32();
+//        byte[] lhsBytes = new byte[lhsLen];
+//        lhs.read(lhsBytes, 0, lhsLen);
+
+        int rhsLen = crhs.readRawVarint32();
+//        byte[] rhsBytes = new byte[lhsLen];
+//        lhs.read(rhsBytes, 0, rhsLen);
+
+//        return WritableComparator.compareBytes(lhsBytes, 0, lhsLen, rhsBytes, 0, rhsLen);
+        return WritableComparator.compareBytes(lhs.getBuffer(), lhs.getPosition(), lhsLen, rhs.getBuffer(), rhs.getPosition(), rhsLen);
       } catch (IOException e) {
         throw new RuntimeException(e);
       }
