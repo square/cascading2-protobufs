@@ -101,14 +101,7 @@ public class ProtobufSerialization<T extends Message> extends Configured impleme
 
       try {
         int lhsLen = clhs.readRawVarint32();
-//        byte[] lhsBytes = new byte[lhsLen];
-//        lhs.read(lhsBytes, 0, lhsLen);
-
         int rhsLen = crhs.readRawVarint32();
-//        byte[] rhsBytes = new byte[lhsLen];
-//        lhs.read(rhsBytes, 0, rhsLen);
-
-//        return WritableComparator.compareBytes(lhsBytes, 0, lhsLen, rhsBytes, 0, rhsLen);
         return WritableComparator.compareBytes(lhs.getBuffer(), lhs.getPosition(), lhsLen, rhs.getBuffer(), rhs.getPosition(), rhsLen);
       } catch (IOException e) {
         throw new RuntimeException(e);
