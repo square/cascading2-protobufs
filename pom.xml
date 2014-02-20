@@ -61,6 +61,11 @@
 
     <dependencies>
       <dependency>
+        <groupId>com.squareup</groupId>
+        <artifactId>cascading-helpers</artifactId>
+        <version>0.14-SNAPSHOT</version>
+      </dependency>
+      <dependency>
         <groupId>cascading</groupId>
         <artifactId>cascading-core</artifactId>
         <version>2.2.0-wip-19</version>
