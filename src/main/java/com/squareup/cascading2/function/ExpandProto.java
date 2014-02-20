@@ -9,12 +9,16 @@ import cascading.tuple.Tuple;
 import com.google.protobuf.Descriptors;
 import com.google.protobuf.Message;
 import com.squareup.cascading2.util.Util;
+import com.squareup.cascading_helpers.operation.KnowsEmittedClasses;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class ExpandProto<T extends Message> extends BaseOperation implements Function {
+public class ExpandProto<T extends Message> extends BaseOperation implements Function, KnowsEmittedClasses {
   private final String messageClassName;
   private final String[] fieldsToExtract;
 
@@ -133,5 +137,18 @@ public class ExpandProto<T extends Message> extends BaseOperation implements Fun
       fieldDescriptorsToExtract = fieldDescriptors.toArray(new Descriptors.FieldDescriptor[fieldDescriptors.size()]);
     }
     return fieldDescriptorsToExtract;
+  }
+
+  @Override
+  public Set<Class> getEmittedClasses() {
+    Set<Class> results = new HashSet<Class>();
+    for (Descriptors.FieldDescriptor fieldDesc : getFieldDescriptorsToExtract(null, messageClassName, fieldsToExtract)) {
+      Descriptors.FieldDescriptor.Type type = fieldDesc.getType();
+      if (type.getJavaType() == Descriptors.FieldDescriptor.JavaType.MESSAGE) {
+        results.add(Util.messageClassFromFieldDesc(messageClassName, fieldDesc));
+      }
+    }
+
+    return results;
   }
 }

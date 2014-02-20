@@ -1,5 +1,6 @@
 package com.squareup.cascading2.util;
 
+import com.google.protobuf.Descriptors;
 import com.google.protobuf.Message;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -21,5 +22,10 @@ public final class Util {
     } catch (InvocationTargetException e) {
       throw new RuntimeException(e);
     }
+  }
+
+  public static Class<? extends Message> messageClassFromFieldDesc(String messageClassName, Descriptors.FieldDescriptor fieldDescriptor) {
+    Message.Builder builder = builderFromMessageClass(messageClassName);
+    return (Class<? extends Message>) builder.build().getField(fieldDescriptor).getClass();
   }
 }

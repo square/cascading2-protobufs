@@ -17,6 +17,7 @@ import com.squareup.cascading2.generated.Example;
 import com.squareup.cascading2.scheme.ProtobufScheme;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import junit.framework.TestCase;
 import org.apache.hadoop.conf.Configuration;
@@ -170,6 +171,11 @@ public class TestExpandProto extends TestCase {
 
     assertEquals(new Tuple(0, 1, "bryan", "bryan@mail.com", Example.Person.Position.CEO.getNumber()).toString(), results.get(0).toString());
     assertEquals(new Tuple(25, 2, "lucas", null, null).toString(), results.get(1).toString());
+  }
+
+  public void testGetEmittedClasses() throws Exception {
+    ExpandProto<Example.Partnership> func = new ExpandProto<Example.Partnership>(Example.Partnership.class, "leader");
+    assertEquals(Collections.singleton(Example.Person.class), func.getEmittedClasses());
   }
 
   protected static List<Tuple> operateFunction(Function func, final TupleEntry argument) {
