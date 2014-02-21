@@ -18,30 +18,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class ExpandProto<T extends Message> extends BaseOperation implements Function, KnowsEmittedClasses {
-  private final String messageClassName;
-  private final String[] fieldsToExtract;
-
-  private transient Descriptors.FieldDescriptor[] fieldDescriptorsToExtract;
-
-  protected static <T extends Message> String[] getAllFields(Class<T> messageClass) {
-    try {
-      Method m = messageClass.getMethod("newBuilder");
-      Message.Builder builder = (Message.Builder) m.invoke(new Object[]{});
-
-      List<String> fieldNames = new ArrayList<String>();
-      for (Descriptors.FieldDescriptor fieldDesc : builder.getDescriptorForType().getFields()) {
-        fieldNames.add(fieldDesc.getName());
-      }
-      return fieldNames.toArray(new String[fieldNames.size()]);
-    } catch (IllegalAccessException e) {
-      throw new RuntimeException(e);
-    } catch (NoSuchMethodException e) {
-      throw new RuntimeException(e);
-    } catch (InvocationTargetException e) {
-      throw new RuntimeException(e);
-    }
-  }
+public class ExpandProto<T extends Message> extends AbstractExpandProto<T> {
 
   /** Expand the entire struct, using the same field names as they are found in the struct. */
   public ExpandProto(Class<T> messageClass) {
@@ -66,7 +43,7 @@ public class ExpandProto<T extends Message> extends BaseOperation implements Fun
    * names in fieldDeclaration.
    */
   public ExpandProto(Class<T> messageClass, Fields fieldDeclaration, String... fieldsToExtract) {
-    super(1, fieldDeclaration);
+    super(messageClass, fieldDeclaration, fieldsToExtract);
     if (fieldDeclaration.size() != fieldsToExtract.length) {
       throw new IllegalArgumentException("Fields "
           + fieldDeclaration
@@ -91,8 +68,6 @@ public class ExpandProto<T extends Message> extends BaseOperation implements Fun
       }
     }
 
-    this.fieldsToExtract = fieldsToExtract;
-    this.messageClassName = messageClass.getName();
   }
 
   @Override public void operate(FlowProcess flowProcess, FunctionCall functionCall) {
@@ -102,8 +77,7 @@ public class ExpandProto<T extends Message> extends BaseOperation implements Fun
     }
     Tuple result = new Tuple();
 
-    fieldDescriptorsToExtract = getFieldDescriptorsToExtract(fieldDescriptorsToExtract, messageClassName, fieldsToExtract);
-    for (Descriptors.FieldDescriptor fieldDescriptor : fieldDescriptorsToExtract) {
+    for (Descriptors.FieldDescriptor fieldDescriptor : getFieldDescriptorsToExtract()) {
       Object fieldValue = null;
       if (arg.hasField(fieldDescriptor)) {
         fieldValue = arg.getField(fieldDescriptor);
@@ -120,35 +94,5 @@ public class ExpandProto<T extends Message> extends BaseOperation implements Fun
       }
     }
     functionCall.getOutputCollector().add(result);
-  }
-
-  protected static Descriptors.FieldDescriptor[] getFieldDescriptorsToExtract(
-      Descriptors.FieldDescriptor[] fieldDescriptorsToExtract,
-      String messageClassName,
-      String[] fieldsToExtract) {
-    if (fieldDescriptorsToExtract == null) {
-      Message.Builder builder = Util.builderFromMessageClass(messageClassName);
-
-      List <Descriptors.FieldDescriptor> fieldDescriptors = new ArrayList<Descriptors.FieldDescriptor>();
-      for (int i = 0; i < fieldsToExtract.length; i++) {
-        fieldDescriptors.add(builder.getDescriptorForType().findFieldByName(fieldsToExtract[i]));
-      }
-
-      fieldDescriptorsToExtract = fieldDescriptors.toArray(new Descriptors.FieldDescriptor[fieldDescriptors.size()]);
-    }
-    return fieldDescriptorsToExtract;
-  }
-
-  @Override
-  public Set<Class> getEmittedClasses() {
-    Set<Class> results = new HashSet<Class>();
-    for (Descriptors.FieldDescriptor fieldDesc : getFieldDescriptorsToExtract(null, messageClassName, fieldsToExtract)) {
-      Descriptors.FieldDescriptor.Type type = fieldDesc.getType();
-      if (type.getJavaType() == Descriptors.FieldDescriptor.JavaType.MESSAGE) {
-        results.add(Util.messageClassFromFieldDesc(messageClassName, fieldDesc));
-      }
-    }
-
-    return results;
   }
 }

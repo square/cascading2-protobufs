@@ -42,7 +42,7 @@ public class TestExpandProto extends TestCase {
       Example.Person.newBuilder().setName("harry").setId(3);
 
   public void testSimple() throws Exception {
-    ExpandProto allFields = new ExpandProto(Example.Person.class);
+    AbstractExpandProto allFields = new ExpandProto(Example.Person.class);
     List<Tuple> results =
         operateFunction(allFields, new TupleEntry(new Fields("value"), new Tuple(BRYAN.build())));
     Tuple result = results.get(0);
@@ -55,7 +55,7 @@ public class TestExpandProto extends TestCase {
   }
 
   public void testNested() throws Exception {
-    ExpandProto allFields = new ExpandProto(Example.Partnership.class, "leader", "follower");
+    AbstractExpandProto allFields = new ExpandProto(Example.Partnership.class, "leader", "follower");
     List<Tuple> results = operateFunction(allFields, new TupleEntry(new Fields("value"), new Tuple(
         Example.Partnership
             .newBuilder()
@@ -76,6 +76,7 @@ public class TestExpandProto extends TestCase {
   public void testRepeated() throws Exception {
     try {
       new ExpandProto(Example.Partnership.class, "silent");
+      fail("this should have thrown an exception!");
     } catch(IllegalArgumentException e) {
       // ok
     }
@@ -112,7 +113,7 @@ public class TestExpandProto extends TestCase {
   }
 
   public void testWrongArgumentClass() throws Exception {
-    ExpandProto func = new ExpandProto(Example.Person.class, "name");
+    AbstractExpandProto func = new ExpandProto(Example.Person.class, "name");
     try {
       func.operate(new HadoopFlowProcess(), new FunctionCall() {
         @Override public TupleEntry getArguments() {
@@ -174,7 +175,7 @@ public class TestExpandProto extends TestCase {
   }
 
   public void testGetEmittedClasses() throws Exception {
-    ExpandProto<Example.Partnership> func = new ExpandProto<Example.Partnership>(Example.Partnership.class, "leader");
+    AbstractExpandProto<Example.Partnership> func = new ExpandProto<Example.Partnership>(Example.Partnership.class, "leader");
     assertEquals(Collections.singleton(Example.Person.class), func.getEmittedClasses());
   }
 
