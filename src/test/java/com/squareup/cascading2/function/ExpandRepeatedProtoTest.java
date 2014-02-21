@@ -68,7 +68,7 @@ public class ExpandRepeatedProtoTest extends TestCase {
   }
 
   public void testRepeated() throws Exception {
-    ExpandRepeatedProto silent = new ExpandRepeatedProto(Example.Partnership.class, "leader", "silent");
+    ExpandRepeatedProto silent = new ExpandRepeatedProto(Example.Partnership.class, "silent");
     List<Tuple> results = TestExpandProto.operateFunction(silent, new TupleEntry(new Fields("value"), new Tuple(
         Example.Partnership
             .newBuilder()
@@ -96,25 +96,10 @@ public class ExpandRepeatedProtoTest extends TestCase {
     }
 
     try {
-      new ExpandRepeatedProto<Example.Person>(Example.Person.class, new Fields("1", "2"), "id");
-      fail("should throw exception with arg length mismatch");
+      new ExpandRepeatedProto<Example.Partnership>(Example.Partnership.class, "leader");
+      fail("should throw exception with non-repeated field");
     } catch(IllegalArgumentException e) {
       // ok
     }
   }
-
-  public void testBadArguments() throws Exception {
-    try {
-      new ExpandRepeatedProto<Example.Person>(Example.Person.class, "leader");
-      fail("should throw exception because this field isn't repeated");
-    } catch(IllegalArgumentException e) {
-      // ok
-    }
-
-    try {
-      new ExpandRepeatedProto<Example.Market>(Example.Market.class);
-      fail("should throw exception because there are multiple repeated fields");
-    } catch(UnsupportedOperationException e) {
-      // ok
-    }  }
 }

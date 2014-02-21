@@ -8,89 +8,33 @@ import cascading.operation.FunctionCall;
 import cascading.tuple.Fields;
 import cascading.tuple.Tuple;
 import com.google.protobuf.Descriptors;
-import com.google.protobuf.Message;
 import com.squareup.cascading2.util.Util;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
+import com.squareup.cascading_helpers.operation.KnowsEmittedClasses;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-public class ExpandRepeatedProto <T extends Message> extends BaseOperation implements Function {
-  private final String messageClassName;
-  private final String[] fieldsToExtract;
-
-  private transient Descriptors.FieldDescriptor[] fieldDescriptorsToExtract;
-
-  /** Expand the entire struct, using the same field names as they are found in the struct. */
-  public ExpandRepeatedProto(Class<T> messageClass) {
-    this(messageClass, ExpandProto.getAllFields(messageClass));
-  }
-
-  /** Expand the entire struct, using the supplied field names to name the resultant fields. */
-  public ExpandRepeatedProto(Class<T> messageClass, Fields fieldDeclaration) {
-    this(messageClass, fieldDeclaration, ExpandProto.getAllFields(messageClass));
-  }
-
+public class ExpandRepeatedProto<T extends Message> extends AbstractExpandProto<T> {
   /**
-   * Expand only the fields listed in fieldsToExtract, using the same fields names as they are found
-   * in the struct.
+   * Expand the specified repeated field, keeping the same field name for the Tuple.
    */
-  public ExpandRepeatedProto(Class<T> messageClass, String... fieldsToExtract) {
-    this(messageClass, new Fields(fieldsToExtract), fieldsToExtract);
-  }
-
-  /**
-   * Expand only the fields listed in fieldsToExtract, naming them with the corresponding field
-   * names in fieldDeclaration.
-   */
-  public ExpandRepeatedProto(Class<T> messageClass, Fields fieldDeclaration,
-      String... fieldsToExtract) {
+  public ExpandRepeatedProto(Class<T> messageClass, String fieldName) {
     // Set up fields and perform basic checks
-    super(1, fieldDeclaration);
-    if (fieldDeclaration.size() != fieldsToExtract.length) {
-      throw new IllegalArgumentException("Fields "
-          + fieldDeclaration
-          + " doesn't have enough field names to identify all "
-          + fieldsToExtract.length
-          + " fields in "
-          + messageClass.getName());
-    }
+    super(messageClass, new Fields(fieldName), new String[]{fieldName});
 
     Message.Builder builder = Util.builderFromMessageClass(messageClass.getName());
 
-    for (int i = 0; i < fieldsToExtract.length; i++) {
-      Descriptors.FieldDescriptor field = builder.getDescriptorForType().findFieldByName(fieldsToExtract[i]);
-      if (field == null) {
-        throw new IllegalArgumentException("Could not find a field named '"
-            + fieldsToExtract[i]
-            + "' in message class "
-            + messageClass.getName());
-      }
+    Descriptors.FieldDescriptor field = builder.getDescriptorForType().findFieldByName(fieldName);
+    if (field == null) {
+      throw new IllegalArgumentException("No field named '"
+          + fieldName
+          + "' in message class "
+          + messageClass.getName());
     }
 
-    this.fieldsToExtract = fieldsToExtract;
-    this.messageClassName = messageClass.getName();
-
-    // Check repeated fields
-    int repeatedCount = 0;
-
-    for (int i = 0; i < fieldsToExtract.length; i++) {
-      Descriptors.FieldDescriptor field =
-          builder.getDescriptorForType().findFieldByName(fieldsToExtract[i]);
-
-      if (field.isRepeated()) {
-        repeatedCount++;
-      }
-    }
-
-    String className =
-        Util.builderFromMessageClass(messageClass.getName()).getDescriptorForType().getName();
-    if (repeatedCount == 0) {
-      throw new IllegalArgumentException("None of the requested fields in struct " + className +
-          " are repeated.");
-    } else if (repeatedCount > 1) {
-      throw new UnsupportedOperationException("More than one of the requested fields in struct " +
-          className + " is repeated.");
+    if (!field.isRepeated()) {
+      throw new IllegalArgumentException("Field " + fieldName + " is not a repeated field in message class " + messageClass.getName() + ".");
     }
   }
 
@@ -109,52 +53,12 @@ public class ExpandRepeatedProto <T extends Message> extends BaseOperation imple
       throw new IllegalArgumentException("Expected argument of type " + messageClassName + ", found " + arg.getClass().getName());
     }
 
-    // Build the "prototype" tuple: a tuple that has all the fields that will be the same among
-    // the list of resultant tuples.
-    Tuple prototypeTuple = new Tuple();
-    int repeatedFieldIndex = -1;
+    Descriptors.FieldDescriptor fieldDescriptor = getFieldDescriptorsToExtract()[0];
 
-    fieldDescriptorsToExtract = ExpandProto.getFieldDescriptorsToExtract(fieldDescriptorsToExtract, messageClassName, fieldsToExtract);
-    for (int i = 0; i < fieldDescriptorsToExtract.length; i++) {
-      Descriptors.FieldDescriptor fieldDescriptor = fieldDescriptorsToExtract[i];
+    List<Object> repeatedValues = (List<Object>) arg.getField(fieldDescriptor);
 
-      if (fieldDescriptor.isRepeated()) {
-        repeatedFieldIndex = i;
-        prototypeTuple.add(null);
-        continue;
-      } else {
-
-        Object fieldValue = null;
-        if (arg.hasField(fieldDescriptor)) {
-          fieldValue = arg.getField(fieldDescriptor);
-        }
-
-        if (fieldValue != null) {
-          if (fieldDescriptor.getJavaType() == Descriptors.FieldDescriptor.JavaType.ENUM) {
-            Descriptors.EnumValueDescriptor valueDescriptor =
-                (Descriptors.EnumValueDescriptor) fieldValue;
-            fieldValue = valueDescriptor.getNumber();
-          }
-          prototypeTuple.add(fieldValue);
-        } else {
-          prototypeTuple.add(null);
-        }
-      }
-    }
-
-    Descriptors.FieldDescriptor repeatedField = fieldDescriptorsToExtract[repeatedFieldIndex];
-    List<Object> repeatedValues = (List<Object>) arg.getField(repeatedField);
-
-    if (repeatedValues.size() == 0) {
-      // If there are no copies of the repeated field, return at least one copy of the tuple.
-      functionCall.getOutputCollector().add(prototypeTuple);
-    } else {
-      for (Object value : repeatedValues) {
-        Tuple copy = new Tuple(prototypeTuple);
-        copy.set(repeatedFieldIndex, value);
-
-        functionCall.getOutputCollector().add(copy);
-      }
+    for (Object o : repeatedValues) {
+      functionCall.getOutputCollector().add(new Tuple(o));
     }
   }
 }
