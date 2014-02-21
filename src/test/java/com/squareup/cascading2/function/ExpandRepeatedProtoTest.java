@@ -1,27 +1,18 @@
 package com.squareup.cascading2.function;
 
-import cascading.flow.hadoop.HadoopFlowConnector;
-import cascading.flow.hadoop.HadoopFlowProcess;
-import cascading.operation.Function;
-import cascading.operation.FunctionCall;
-import cascading.pipe.Each;
-import cascading.pipe.Pipe;
-import cascading.scheme.hadoop.TextLine;
-import cascading.tap.hadoop.Hfs;
 import cascading.tuple.Fields;
 import cascading.tuple.Tuple;
 import cascading.tuple.TupleEntry;
-import cascading.tuple.TupleEntryCollector;
-import cascading.tuple.TupleEntryIterator;
 import com.squareup.cascading2.generated.Example;
-import com.squareup.cascading2.scheme.ProtobufScheme;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import junit.framework.TestCase;
-import org.apache.hadoop.conf.Configuration;
-import org.apache.hadoop.fs.FileSystem;
-import org.apache.hadoop.fs.Path;
+
+import static com.squareup.cascading2.function.TestExtensionSupport.COFFEE_DRINK;
+import static com.squareup.cascading2.function.TestExtensionSupport.DRINK_ORDER_EXTENSIONS;
+import static com.squareup.cascading2.function.TestExtensionSupport.TEA_AND_TWO_COFFEES;
+import static com.squareup.cascading2.function.TestExtensionSupport.TEA_DRINK;
 
 public class ExpandRepeatedProtoTest extends TestCase {
     private static final Example.Partnership P1 = Example.Partnership.newBuilder()
@@ -49,8 +40,8 @@ public class ExpandRepeatedProtoTest extends TestCase {
 
   public void testOnlyRepeated() throws Exception {
     ExpandRepeatedProto silent = new ExpandRepeatedProto(Example.Partnership.class, "silent");
-    List<Tuple> results = TestExpandProto.operateFunction(silent, new TupleEntry(new Fields("value"), new Tuple(
-        Example.Partnership
+    List<Tuple> results = ExpandProtoTest.operateFunction(silent,
+        new TupleEntry(new Fields("value"), new Tuple(Example.Partnership
             .newBuilder()
             .setLeader(BRYAN)
             .setFollower(LUCAS)
@@ -69,8 +60,8 @@ public class ExpandRepeatedProtoTest extends TestCase {
 
   public void testRepeated() throws Exception {
     ExpandRepeatedProto silent = new ExpandRepeatedProto(Example.Partnership.class, "leader", "silent");
-    List<Tuple> results = TestExpandProto.operateFunction(silent, new TupleEntry(new Fields("value"), new Tuple(
-        Example.Partnership
+    List<Tuple> results = ExpandProtoTest.operateFunction(silent,
+        new TupleEntry(new Fields("value"), new Tuple(Example.Partnership
             .newBuilder()
             .setLeader(BRYAN)
             .setFollower(LUCAS)
@@ -87,7 +78,24 @@ public class ExpandRepeatedProtoTest extends TestCase {
     assertEquals(expected, results);
   }
 
-   public void testConstructorErrorCases() throws Exception {
+  public void testRepeatedExtension() throws Exception {
+    ExpandRepeatedProto drink = ExpandRepeatedProto.expandRepeatedProto(Example.DrinkOrder.class,
+        DRINK_ORDER_EXTENSIONS);
+
+    List<Tuple> results = ExpandProtoTest.operateFunction(drink,
+        new TupleEntry(new Fields("value"), new Tuple(TEA_AND_TWO_COFFEES)));
+
+    List<Tuple> expected = Arrays.asList(
+      new Tuple("Nathan", TEA_DRINK),
+      new Tuple("Nathan", COFFEE_DRINK),
+      new Tuple("Nathan", COFFEE_DRINK)
+    );
+
+    assertEquals(expected, results);
+  }
+
+
+  public void testConstructorErrorCases() throws Exception {
     try {
       new ExpandRepeatedProto<Example.Person>(Example.Person.class, "1");
       fail("should throw exception with non-found field");

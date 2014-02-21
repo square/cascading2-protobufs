@@ -1,34 +1,38 @@
 package com.squareup.cascading2.function;
 
+import cascading.flow.FlowProcess;
 import cascading.operation.BaseOperation;
 import cascading.operation.Function;
-import com.google.protobuf.Message;
-import cascading.flow.FlowProcess;
 import cascading.operation.FunctionCall;
 import cascading.tuple.Fields;
 import cascading.tuple.Tuple;
 import com.google.protobuf.Descriptors;
 import com.google.protobuf.Message;
+import com.squareup.cascading2.util.ExtensionSupport;
+import com.squareup.cascading2.util.SelectedFields;
 import com.squareup.cascading2.util.Util;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ExpandRepeatedProto <T extends Message> extends BaseOperation implements Function {
   private final String messageClassName;
   private final String[] fieldsToExtract;
+  private final SelectedFields selectedFields;
 
-  private transient Descriptors.FieldDescriptor[] fieldDescriptorsToExtract;
+  public static <T extends Message> ExpandRepeatedProto<T> expandRepeatedProto(Class<T> messageClass, ExtensionSupport extensionSupport) {
+    List<Descriptors.FieldDescriptor> allFields = Util.getFields(messageClass, extensionSupport);
+    String[] fieldNames = Util.getFieldNames(allFields);
+    return new ExpandRepeatedProto<T>(messageClass, new Fields(fieldNames), extensionSupport, fieldNames);
+  }
+
 
   /** Expand the entire struct, using the same field names as they are found in the struct. */
   public ExpandRepeatedProto(Class<T> messageClass) {
-    this(messageClass, ExpandProto.getAllFields(messageClass));
+    this(messageClass, Util.getAllFields(messageClass));
   }
 
   /** Expand the entire struct, using the supplied field names to name the resultant fields. */
   public ExpandRepeatedProto(Class<T> messageClass, Fields fieldDeclaration) {
-    this(messageClass, fieldDeclaration, ExpandProto.getAllFields(messageClass));
+    this(messageClass, fieldDeclaration, ExtensionSupport.NONE, Util.getAllFields(messageClass));
   }
 
   /**
@@ -36,7 +40,11 @@ public class ExpandRepeatedProto <T extends Message> extends BaseOperation imple
    * in the struct.
    */
   public ExpandRepeatedProto(Class<T> messageClass, String... fieldsToExtract) {
-    this(messageClass, new Fields(fieldsToExtract), fieldsToExtract);
+    this(messageClass, new Fields(fieldsToExtract), ExtensionSupport.NONE, fieldsToExtract);
+  }
+
+  public ExpandRepeatedProto(Class<T> messageClass, Fields fieldDeclaration, String... fieldsToExtract) {
+    this(messageClass, fieldDeclaration, ExtensionSupport.NONE, fieldsToExtract);
   }
 
   /**
@@ -44,9 +52,11 @@ public class ExpandRepeatedProto <T extends Message> extends BaseOperation imple
    * names in fieldDeclaration.
    */
   public ExpandRepeatedProto(Class<T> messageClass, Fields fieldDeclaration,
-      String... fieldsToExtract) {
+      ExtensionSupport extensionSupport, String... fieldsToExtract) {
     // Set up fields and perform basic checks
     super(1, fieldDeclaration);
+    this.selectedFields = new SelectedFields(messageClass.getName(), extensionSupport, fieldsToExtract);
+
     if (fieldDeclaration.size() != fieldsToExtract.length) {
       throw new IllegalArgumentException("Fields "
           + fieldDeclaration
@@ -59,7 +69,7 @@ public class ExpandRepeatedProto <T extends Message> extends BaseOperation imple
     Message.Builder builder = Util.builderFromMessageClass(messageClass.getName());
 
     for (int i = 0; i < fieldsToExtract.length; i++) {
-      Descriptors.FieldDescriptor field = builder.getDescriptorForType().findFieldByName(fieldsToExtract[i]);
+      Descriptors.FieldDescriptor field = selectedFields.findByName(fieldsToExtract[i]);
       if (field == null) {
         throw new IllegalArgumentException("Could not find a field named '"
             + fieldsToExtract[i]
@@ -75,8 +85,7 @@ public class ExpandRepeatedProto <T extends Message> extends BaseOperation imple
     int repeatedCount = 0;
 
     for (int i = 0; i < fieldsToExtract.length; i++) {
-      Descriptors.FieldDescriptor field =
-          builder.getDescriptorForType().findFieldByName(fieldsToExtract[i]);
+      Descriptors.FieldDescriptor field = selectedFields.findByName(fieldsToExtract[i]);
 
       if (field.isRepeated()) {
         repeatedCount++;
@@ -114,9 +123,9 @@ public class ExpandRepeatedProto <T extends Message> extends BaseOperation imple
     Tuple prototypeTuple = new Tuple();
     int repeatedFieldIndex = -1;
 
-    fieldDescriptorsToExtract = ExpandProto.getFieldDescriptorsToExtract(fieldDescriptorsToExtract, messageClassName, fieldsToExtract);
-    for (int i = 0; i < fieldDescriptorsToExtract.length; i++) {
-      Descriptors.FieldDescriptor fieldDescriptor = fieldDescriptorsToExtract[i];
+    List<Descriptors.FieldDescriptor> fields = selectedFields.get();
+    for (int i = 0; i < fields.size(); i++) {
+      Descriptors.FieldDescriptor fieldDescriptor = fields.get(i);
 
       if (fieldDescriptor.isRepeated()) {
         repeatedFieldIndex = i;
@@ -142,7 +151,7 @@ public class ExpandRepeatedProto <T extends Message> extends BaseOperation imple
       }
     }
 
-    Descriptors.FieldDescriptor repeatedField = fieldDescriptorsToExtract[repeatedFieldIndex];
+    Descriptors.FieldDescriptor repeatedField = fields.get(repeatedFieldIndex);
     List<Object> repeatedValues = (List<Object>) arg.getField(repeatedField);
 
     if (repeatedValues.size() == 0) {

@@ -22,3 +22,34 @@ message Market {
   repeated Person sellers = 1;
   repeated Person buyers = 2;
 }
+
+message Drink {
+  optional int32 ounces = 1;
+
+  extensions 2 to 3;
+}
+
+message DrinkOrder {
+  optional string name = 1;
+
+  extensions 2;
+}
+
+extend DrinkOrder {
+  repeated Drink drink = 2;
+}
+
+extend Drink {
+  optional Tea tea = 2;
+  optional Coffee coffee = 3;
+}
+
+message Coffee {
+  optional bool sugar = 1;
+  optional bool cream = 2;
+}
+
+message Tea {
+  optional bool honey = 1;
+  optional bool milk = 2;
+}

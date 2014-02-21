@@ -7,6 +7,9 @@ public final class Example {
   private Example() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
+    registry.add(com.squareup.cascading2.generated.Example.drink);
+    registry.add(com.squareup.cascading2.generated.Example.tea);
+    registry.add(com.squareup.cascading2.generated.Example.coffee);
   }
   public interface PersonOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
@@ -2524,6 +2527,1620 @@ Removes the value at {@code index} in {@link #getBuyersList() buyers} .
     // @@protoc_insertion_point(class_scope:com.squareup.cascading2.generated.Market)
   }
   
+  public interface DrinkOrBuilder extends
+      com.google.protobuf.GeneratedMessage.
+          ExtendableMessageOrBuilder<Drink> {
+    
+    /**
+Returns true if {@link #getOunces() ounces}  has been set.
+*/
+    boolean hasOunces();
+    /**
+Returns the field, {@code ounces}.<br>
+{@code Proto: optional int32 ounces = 1;}
+*/
+    int getOunces();
+  }
+  /**
+
+*/
+  public static final class Drink extends
+      com.google.protobuf.GeneratedMessage.ExtendableMessage<
+        Drink> implements DrinkOrBuilder {
+    // Use Drink.newBuilder() to construct.
+    private Drink(Builder builder) {
+      super(builder);
+    }
+    private Drink(boolean noInit) {}
+    
+    private static final Drink defaultInstance;
+    public static Drink getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public Drink getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Drink_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Drink_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional int32 ounces = 1;
+    public static final int OUNCES_FIELD_NUMBER = 1;
+    private int ounces_;
+    public boolean hasOunces() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public int getOunces() {
+      return ounces_;
+    }
+    
+    private void initFields() {
+      ounces_ = 0;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      if (!extensionsAreInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      com.google.protobuf.GeneratedMessage
+        .ExtendableMessage<com.squareup.cascading2.generated.Example.Drink>.ExtensionWriter extensionWriter =
+          newExtensionWriter();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeInt32(1, ounces_);
+      }
+      extensionWriter.writeUntil(4, output);
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, ounces_);
+      }
+      size += extensionsSerializedSize();
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.squareup.cascading2.generated.Example.Drink parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Drink parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Drink parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Drink parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Drink parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Drink parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Drink parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.squareup.cascading2.generated.Example.Drink parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.squareup.cascading2.generated.Example.Drink parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Drink parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.squareup.cascading2.generated.Example.Drink prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.ExtendableBuilder<
+          com.squareup.cascading2.generated.Example.Drink, Builder> implements com.squareup.cascading2.generated.Example.DrinkOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Drink_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Drink_fieldAccessorTable;
+      }
+      
+      // Construct using com.squareup.cascading2.generated.Example.Drink.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        ounces_ = 0;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.squareup.cascading2.generated.Example.Drink.getDescriptor();
+      }
+      
+      public com.squareup.cascading2.generated.Example.Drink getDefaultInstanceForType() {
+        return com.squareup.cascading2.generated.Example.Drink.getDefaultInstance();
+      }
+      
+      public com.squareup.cascading2.generated.Example.Drink build() {
+        com.squareup.cascading2.generated.Example.Drink result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.squareup.cascading2.generated.Example.Drink buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.squareup.cascading2.generated.Example.Drink result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.squareup.cascading2.generated.Example.Drink buildPartial() {
+        com.squareup.cascading2.generated.Example.Drink result = new com.squareup.cascading2.generated.Example.Drink(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.ounces_ = ounces_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.squareup.cascading2.generated.Example.Drink) {
+          return mergeFrom((com.squareup.cascading2.generated.Example.Drink)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.squareup.cascading2.generated.Example.Drink other) {
+        if (other == com.squareup.cascading2.generated.Example.Drink.getDefaultInstance()) return this;
+        if (other.hasOunces()) {
+          setOunces(other.getOunces());
+        }
+        this.mergeExtensionFields(other);
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        if (!extensionsAreInitialized()) {
+          
+          return false;
+        }
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              ounces_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional int32 ounces = 1;
+      private int ounces_ ;
+      public boolean hasOunces() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public int getOunces() {
+        return ounces_;
+      }
+      public Builder setOunces(int value) {
+        bitField0_ |= 0x00000001;
+        ounces_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearOunces() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        ounces_ = 0;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.squareup.cascading2.generated.Drink)
+    }
+    
+    static {
+      defaultInstance = new Drink(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.squareup.cascading2.generated.Drink)
+  }
+  
+  public interface DrinkOrderOrBuilder extends
+      com.google.protobuf.GeneratedMessage.
+          ExtendableMessageOrBuilder<DrinkOrder> {
+    
+    /**
+Returns true if {@link #getName() name}  has been set.
+*/
+    boolean hasName();
+    /**
+Returns the field, {@code name}.<br>
+{@code Proto: optional string name = 1;}
+*/
+    String getName();
+  }
+  /**
+
+*/
+  public static final class DrinkOrder extends
+      com.google.protobuf.GeneratedMessage.ExtendableMessage<
+        DrinkOrder> implements DrinkOrderOrBuilder {
+    // Use DrinkOrder.newBuilder() to construct.
+    private DrinkOrder(Builder builder) {
+      super(builder);
+    }
+    private DrinkOrder(boolean noInit) {}
+    
+    private static final DrinkOrder defaultInstance;
+    public static DrinkOrder getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public DrinkOrder getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_DrinkOrder_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_DrinkOrder_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional string name = 1;
+    public static final int NAME_FIELD_NUMBER = 1;
+    private java.lang.Object name_;
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          name_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    private void initFields() {
+      name_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      if (!extensionsAreInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      com.google.protobuf.GeneratedMessage
+        .ExtendableMessage<com.squareup.cascading2.generated.Example.DrinkOrder>.ExtensionWriter extensionWriter =
+          newExtensionWriter();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getNameBytes());
+      }
+      extensionWriter.writeUntil(3, output);
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getNameBytes());
+      }
+      size += extensionsSerializedSize();
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.squareup.cascading2.generated.Example.DrinkOrder parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.DrinkOrder parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.DrinkOrder parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.DrinkOrder parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.DrinkOrder parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.DrinkOrder parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.DrinkOrder parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.squareup.cascading2.generated.Example.DrinkOrder parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.squareup.cascading2.generated.Example.DrinkOrder parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.DrinkOrder parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.squareup.cascading2.generated.Example.DrinkOrder prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.ExtendableBuilder<
+          com.squareup.cascading2.generated.Example.DrinkOrder, Builder> implements com.squareup.cascading2.generated.Example.DrinkOrderOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_DrinkOrder_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_DrinkOrder_fieldAccessorTable;
+      }
+      
+      // Construct using com.squareup.cascading2.generated.Example.DrinkOrder.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        name_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.squareup.cascading2.generated.Example.DrinkOrder.getDescriptor();
+      }
+      
+      public com.squareup.cascading2.generated.Example.DrinkOrder getDefaultInstanceForType() {
+        return com.squareup.cascading2.generated.Example.DrinkOrder.getDefaultInstance();
+      }
+      
+      public com.squareup.cascading2.generated.Example.DrinkOrder build() {
+        com.squareup.cascading2.generated.Example.DrinkOrder result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.squareup.cascading2.generated.Example.DrinkOrder buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.squareup.cascading2.generated.Example.DrinkOrder result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.squareup.cascading2.generated.Example.DrinkOrder buildPartial() {
+        com.squareup.cascading2.generated.Example.DrinkOrder result = new com.squareup.cascading2.generated.Example.DrinkOrder(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.name_ = name_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.squareup.cascading2.generated.Example.DrinkOrder) {
+          return mergeFrom((com.squareup.cascading2.generated.Example.DrinkOrder)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.squareup.cascading2.generated.Example.DrinkOrder other) {
+        if (other == com.squareup.cascading2.generated.Example.DrinkOrder.getDefaultInstance()) return this;
+        if (other.hasName()) {
+          setName(other.getName());
+        }
+        this.mergeExtensionFields(other);
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        if (!extensionsAreInitialized()) {
+          
+          return false;
+        }
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              name_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional string name = 1;
+      private java.lang.Object name_ = "";
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      /**
+Sets the {@link #getName() name}  field.
+*/
+      public Builder setName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+Clears the {@link #getName() name}  field.
+*/
+      public Builder clearName() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+Sets the {@link #getName() name}  field.
+*/
+      void setName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000001;
+        name_ = value;
+        onChanged();
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.squareup.cascading2.generated.DrinkOrder)
+    }
+    
+    static {
+      defaultInstance = new DrinkOrder(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.squareup.cascading2.generated.DrinkOrder)
+  }
+  
+  public interface CoffeeOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    /**
+Returns true if {@link #getSugar() sugar}  has been set.
+*/
+    boolean hasSugar();
+    /**
+Returns the field, {@code sugar}.<br>
+{@code Proto: optional bool sugar = 1;}
+*/
+    boolean getSugar();
+    
+    /**
+Returns true if {@link #getCream() cream}  has been set.
+*/
+    boolean hasCream();
+    /**
+Returns the field, {@code cream}.<br>
+{@code Proto: optional bool cream = 2;}
+*/
+    boolean getCream();
+  }
+  /**
+
+*/
+  public static final class Coffee extends
+      com.google.protobuf.GeneratedMessage
+      implements CoffeeOrBuilder {
+    // Use Coffee.newBuilder() to construct.
+    private Coffee(Builder builder) {
+      super(builder);
+    }
+    private Coffee(boolean noInit) {}
+    
+    private static final Coffee defaultInstance;
+    public static Coffee getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public Coffee getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Coffee_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Coffee_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional bool sugar = 1;
+    public static final int SUGAR_FIELD_NUMBER = 1;
+    private boolean sugar_;
+    public boolean hasSugar() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public boolean getSugar() {
+      return sugar_;
+    }
+    
+    // optional bool cream = 2;
+    public static final int CREAM_FIELD_NUMBER = 2;
+    private boolean cream_;
+    public boolean hasCream() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public boolean getCream() {
+      return cream_;
+    }
+    
+    private void initFields() {
+      sugar_ = false;
+      cream_ = false;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBool(1, sugar_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBool(2, cream_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(1, sugar_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(2, cream_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.squareup.cascading2.generated.Example.Coffee parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Coffee parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Coffee parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Coffee parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Coffee parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Coffee parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Coffee parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.squareup.cascading2.generated.Example.Coffee parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.squareup.cascading2.generated.Example.Coffee parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Coffee parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.squareup.cascading2.generated.Example.Coffee prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.squareup.cascading2.generated.Example.CoffeeOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Coffee_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Coffee_fieldAccessorTable;
+      }
+      
+      // Construct using com.squareup.cascading2.generated.Example.Coffee.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        sugar_ = false;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        cream_ = false;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.squareup.cascading2.generated.Example.Coffee.getDescriptor();
+      }
+      
+      public com.squareup.cascading2.generated.Example.Coffee getDefaultInstanceForType() {
+        return com.squareup.cascading2.generated.Example.Coffee.getDefaultInstance();
+      }
+      
+      public com.squareup.cascading2.generated.Example.Coffee build() {
+        com.squareup.cascading2.generated.Example.Coffee result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.squareup.cascading2.generated.Example.Coffee buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.squareup.cascading2.generated.Example.Coffee result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.squareup.cascading2.generated.Example.Coffee buildPartial() {
+        com.squareup.cascading2.generated.Example.Coffee result = new com.squareup.cascading2.generated.Example.Coffee(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.sugar_ = sugar_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.cream_ = cream_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.squareup.cascading2.generated.Example.Coffee) {
+          return mergeFrom((com.squareup.cascading2.generated.Example.Coffee)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.squareup.cascading2.generated.Example.Coffee other) {
+        if (other == com.squareup.cascading2.generated.Example.Coffee.getDefaultInstance()) return this;
+        if (other.hasSugar()) {
+          setSugar(other.getSugar());
+        }
+        if (other.hasCream()) {
+          setCream(other.getCream());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              sugar_ = input.readBool();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              cream_ = input.readBool();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional bool sugar = 1;
+      private boolean sugar_ ;
+      public boolean hasSugar() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public boolean getSugar() {
+        return sugar_;
+      }
+      public Builder setSugar(boolean value) {
+        bitField0_ |= 0x00000001;
+        sugar_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearSugar() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        sugar_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // optional bool cream = 2;
+      private boolean cream_ ;
+      public boolean hasCream() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public boolean getCream() {
+        return cream_;
+      }
+      public Builder setCream(boolean value) {
+        bitField0_ |= 0x00000002;
+        cream_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearCream() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        cream_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.squareup.cascading2.generated.Coffee)
+    }
+    
+    static {
+      defaultInstance = new Coffee(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.squareup.cascading2.generated.Coffee)
+  }
+  
+  public interface TeaOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    /**
+Returns true if {@link #getHoney() honey}  has been set.
+*/
+    boolean hasHoney();
+    /**
+Returns the field, {@code honey}.<br>
+{@code Proto: optional bool honey = 1;}
+*/
+    boolean getHoney();
+    
+    /**
+Returns true if {@link #getMilk() milk}  has been set.
+*/
+    boolean hasMilk();
+    /**
+Returns the field, {@code milk}.<br>
+{@code Proto: optional bool milk = 2;}
+*/
+    boolean getMilk();
+  }
+  /**
+
+*/
+  public static final class Tea extends
+      com.google.protobuf.GeneratedMessage
+      implements TeaOrBuilder {
+    // Use Tea.newBuilder() to construct.
+    private Tea(Builder builder) {
+      super(builder);
+    }
+    private Tea(boolean noInit) {}
+    
+    private static final Tea defaultInstance;
+    public static Tea getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public Tea getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Tea_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Tea_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // optional bool honey = 1;
+    public static final int HONEY_FIELD_NUMBER = 1;
+    private boolean honey_;
+    public boolean hasHoney() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public boolean getHoney() {
+      return honey_;
+    }
+    
+    // optional bool milk = 2;
+    public static final int MILK_FIELD_NUMBER = 2;
+    private boolean milk_;
+    public boolean hasMilk() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public boolean getMilk() {
+      return milk_;
+    }
+    
+    private void initFields() {
+      honey_ = false;
+      milk_ = false;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBool(1, honey_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBool(2, milk_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(1, honey_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(2, milk_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static com.squareup.cascading2.generated.Example.Tea parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Tea parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Tea parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Tea parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Tea parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Tea parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Tea parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.squareup.cascading2.generated.Example.Tea parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static com.squareup.cascading2.generated.Example.Tea parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static com.squareup.cascading2.generated.Example.Tea parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(com.squareup.cascading2.generated.Example.Tea prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements com.squareup.cascading2.generated.Example.TeaOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Tea_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.squareup.cascading2.generated.Example.internal_static_com_squareup_cascading2_generated_Tea_fieldAccessorTable;
+      }
+      
+      // Construct using com.squareup.cascading2.generated.Example.Tea.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        honey_ = false;
+        bitField0_ = (bitField0_ & ~0x00000001);
+        milk_ = false;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.squareup.cascading2.generated.Example.Tea.getDescriptor();
+      }
+      
+      public com.squareup.cascading2.generated.Example.Tea getDefaultInstanceForType() {
+        return com.squareup.cascading2.generated.Example.Tea.getDefaultInstance();
+      }
+      
+      public com.squareup.cascading2.generated.Example.Tea build() {
+        com.squareup.cascading2.generated.Example.Tea result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private com.squareup.cascading2.generated.Example.Tea buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        com.squareup.cascading2.generated.Example.Tea result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public com.squareup.cascading2.generated.Example.Tea buildPartial() {
+        com.squareup.cascading2.generated.Example.Tea result = new com.squareup.cascading2.generated.Example.Tea(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.honey_ = honey_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.milk_ = milk_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.squareup.cascading2.generated.Example.Tea) {
+          return mergeFrom((com.squareup.cascading2.generated.Example.Tea)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(com.squareup.cascading2.generated.Example.Tea other) {
+        if (other == com.squareup.cascading2.generated.Example.Tea.getDefaultInstance()) return this;
+        if (other.hasHoney()) {
+          setHoney(other.getHoney());
+        }
+        if (other.hasMilk()) {
+          setMilk(other.getMilk());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 8: {
+              bitField0_ |= 0x00000001;
+              honey_ = input.readBool();
+              break;
+            }
+            case 16: {
+              bitField0_ |= 0x00000002;
+              milk_ = input.readBool();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional bool honey = 1;
+      private boolean honey_ ;
+      public boolean hasHoney() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public boolean getHoney() {
+        return honey_;
+      }
+      public Builder setHoney(boolean value) {
+        bitField0_ |= 0x00000001;
+        honey_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearHoney() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        honey_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // optional bool milk = 2;
+      private boolean milk_ ;
+      public boolean hasMilk() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public boolean getMilk() {
+        return milk_;
+      }
+      public Builder setMilk(boolean value) {
+        bitField0_ |= 0x00000002;
+        milk_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearMilk() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        milk_ = false;
+        onChanged();
+        return this;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:com.squareup.cascading2.generated.Tea)
+    }
+    
+    static {
+      defaultInstance = new Tea(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:com.squareup.cascading2.generated.Tea)
+  }
+  
+  public static final int DRINK_FIELD_NUMBER = 2;
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.squareup.cascading2.generated.Example.DrinkOrder,
+      java.util.List<com.squareup.cascading2.generated.Example.Drink>> drink = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        com.squareup.cascading2.generated.Example.Drink.class,
+        com.squareup.cascading2.generated.Example.Drink.getDefaultInstance());
+  public static final int TEA_FIELD_NUMBER = 2;
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.squareup.cascading2.generated.Example.Drink,
+      com.squareup.cascading2.generated.Example.Tea> tea = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        com.squareup.cascading2.generated.Example.Tea.class,
+        com.squareup.cascading2.generated.Example.Tea.getDefaultInstance());
+  public static final int COFFEE_FIELD_NUMBER = 3;
+  public static final
+    com.google.protobuf.GeneratedMessage.GeneratedExtension<
+      com.squareup.cascading2.generated.Example.Drink,
+      com.squareup.cascading2.generated.Example.Coffee> coffee = com.google.protobuf.GeneratedMessage
+          .newFileScopedGeneratedExtension(
+        com.squareup.cascading2.generated.Example.Coffee.class,
+        com.squareup.cascading2.generated.Example.Coffee.getDefaultInstance());
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_com_squareup_cascading2_generated_Person_descriptor;
   private static
@@ -2539,6 +4156,26 @@ Removes the value at {@code index} in {@link #getBuyersList() buyers} .
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_squareup_cascading2_generated_Market_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_squareup_cascading2_generated_Drink_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_squareup_cascading2_generated_Drink_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_squareup_cascading2_generated_DrinkOrder_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_squareup_cascading2_generated_DrinkOrder_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_squareup_cascading2_generated_Coffee_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_squareup_cascading2_generated_Coffee_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_com_squareup_cascading2_generated_Tea_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_com_squareup_cascading2_generated_Tea_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2561,7 +4198,18 @@ Removes the value at {@code index} in {@link #getBuyersList() buyers} .
       "2.generated.Person\"\177\n\006Market\022:\n\007sellers\030" +
       "\001 \003(\0132).com.squareup.cascading2.generate" +
       "d.Person\0229\n\006buyers\030\002 \003(\0132).com.squareup." +
-      "cascading2.generated.Person"
+      "cascading2.generated.Person\"\035\n\005Drink\022\016\n\006" +
+      "ounces\030\001 \001(\005*\004\010\002\020\004\" \n\nDrinkOrder\022\014\n\004name" +
+      "\030\001 \001(\t*\004\010\002\020\003\"&\n\006Coffee\022\r\n\005sugar\030\001 \001(\010\022\r\n" +
+      "\005cream\030\002 \001(\010\"\"\n\003Tea\022\r\n\005honey\030\001 \001(\010\022\014\n\004mi" +
+      "lk\030\002 \001(\010:f\n\005drink\022-.com.squareup.cascadi" +
+      "ng2.generated.DrinkOrder\030\002 \003(\0132(.com.squ" +
+      "areup.cascading2.generated.Drink:]\n\003tea\022",
+      "(.com.squareup.cascading2.generated.Drin" +
+      "k\030\002 \001(\0132&.com.squareup.cascading2.genera" +
+      "ted.Tea:c\n\006coffee\022(.com.squareup.cascadi" +
+      "ng2.generated.Drink\030\003 \001(\0132).com.squareup" +
+      ".cascading2.generated.Coffee"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2592,6 +4240,41 @@ Removes the value at {@code index} in {@link #getBuyersList() buyers} .
               new java.lang.String[] { "Sellers", "Buyers", },
               com.squareup.cascading2.generated.Example.Market.class,
               com.squareup.cascading2.generated.Example.Market.Builder.class);
+          internal_static_com_squareup_cascading2_generated_Drink_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_com_squareup_cascading2_generated_Drink_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_squareup_cascading2_generated_Drink_descriptor,
+              new java.lang.String[] { "Ounces", },
+              com.squareup.cascading2.generated.Example.Drink.class,
+              com.squareup.cascading2.generated.Example.Drink.Builder.class);
+          internal_static_com_squareup_cascading2_generated_DrinkOrder_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_com_squareup_cascading2_generated_DrinkOrder_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_squareup_cascading2_generated_DrinkOrder_descriptor,
+              new java.lang.String[] { "Name", },
+              com.squareup.cascading2.generated.Example.DrinkOrder.class,
+              com.squareup.cascading2.generated.Example.DrinkOrder.Builder.class);
+          internal_static_com_squareup_cascading2_generated_Coffee_descriptor =
+            getDescriptor().getMessageTypes().get(5);
+          internal_static_com_squareup_cascading2_generated_Coffee_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_squareup_cascading2_generated_Coffee_descriptor,
+              new java.lang.String[] { "Sugar", "Cream", },
+              com.squareup.cascading2.generated.Example.Coffee.class,
+              com.squareup.cascading2.generated.Example.Coffee.Builder.class);
+          internal_static_com_squareup_cascading2_generated_Tea_descriptor =
+            getDescriptor().getMessageTypes().get(6);
+          internal_static_com_squareup_cascading2_generated_Tea_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_com_squareup_cascading2_generated_Tea_descriptor,
+              new java.lang.String[] { "Honey", "Milk", },
+              com.squareup.cascading2.generated.Example.Tea.class,
+              com.squareup.cascading2.generated.Example.Tea.Builder.class);
+          drink.internalInit(descriptor.getExtensions().get(0));
+          tea.internalInit(descriptor.getExtensions().get(1));
+          coffee.internalInit(descriptor.getExtensions().get(2));
           return null;
         }
       };

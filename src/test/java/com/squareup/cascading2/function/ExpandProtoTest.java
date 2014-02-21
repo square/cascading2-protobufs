@@ -23,7 +23,7 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 
-public class TestExpandProto extends TestCase {
+public class ExpandProtoTest extends TestCase {
 
   private static final Example.Person.Builder BRYAN = Example.Person
       .newBuilder()
@@ -51,6 +51,15 @@ public class TestExpandProto extends TestCase {
         operateFunction(allFields, new TupleEntry(new Fields("value"), new Tuple(LUCAS.build())));
     result = results.get(0);
     assertEquals(new Tuple(2, "lucas", null, null), result);
+  }
+
+  public void testExtension() throws Exception {
+    ExpandProto<Example.Drink> allFields = ExpandProto.expandProto(Example.Drink.class, TestExtensionSupport.DRINK_EXTENSIONS);
+    List<Tuple> results =
+        operateFunction(allFields, new TupleEntry(new Fields("value"), new Tuple(
+            TestExtensionSupport.COFFEE_DRINK)));
+    Tuple result = results.get(0);
+    assertEquals(new Tuple(20, null, TestExtensionSupport.COFFEE), result);
   }
 
   public void testNested() throws Exception {

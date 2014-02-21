@@ -8,45 +8,33 @@ import cascading.tuple.Fields;
 import cascading.tuple.Tuple;
 import com.google.protobuf.Descriptors;
 import com.google.protobuf.Message;
+import com.squareup.cascading2.util.ExtensionSupport;
+import com.squareup.cascading2.util.SelectedFields;
 import com.squareup.cascading2.util.Util;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ExpandProto<T extends Message> extends BaseOperation implements Function {
   private final String messageClassName;
-  private final String[] fieldsToExtract;
+  protected final SelectedFields selectedFields;
 
-  private transient Descriptors.FieldDescriptor[] fieldDescriptorsToExtract;
-
-  protected static <T extends Message> String[] getAllFields(Class<T> messageClass) {
-    try {
-      Method m = messageClass.getMethod("newBuilder");
-      Message.Builder builder = (Message.Builder) m.invoke(new Object[]{});
-
-      List<String> fieldNames = new ArrayList<String>();
-      for (Descriptors.FieldDescriptor fieldDesc : builder.getDescriptorForType().getFields()) {
-        fieldNames.add(fieldDesc.getName());
-      }
-      return fieldNames.toArray(new String[fieldNames.size()]);
-    } catch (IllegalAccessException e) {
-      throw new RuntimeException(e);
-    } catch (NoSuchMethodException e) {
-      throw new RuntimeException(e);
-    } catch (InvocationTargetException e) {
-      throw new RuntimeException(e);
-    }
+  public static <T extends Message> ExpandProto<T> expandProto(Class<T> messageClass,
+      ExtensionSupport extensionSupport) {
+    List<Descriptors.FieldDescriptor> allFields =
+        Util.getFields(messageClass, extensionSupport);
+    String[] fieldNames = Util.getFieldNames(allFields);
+    return new ExpandProto<T>(messageClass, new Fields(fieldNames), extensionSupport, fieldNames);
   }
 
   /** Expand the entire struct, using the same field names as they are found in the struct. */
   public ExpandProto(Class<T> messageClass) {
-    this(messageClass, getAllFields(messageClass));
+    this(messageClass, Util.getAllFields(messageClass));
   }
+
 
   /** Expand the entire struct, using the supplied field names to name the resultant fields. */
   public ExpandProto(Class<T> messageClass, Fields fieldDeclaration) {
-    this(messageClass, fieldDeclaration, getAllFields(messageClass));
+    this(messageClass, fieldDeclaration, Util.getAllFields(messageClass));
   }
 
   /**
@@ -57,49 +45,57 @@ public class ExpandProto<T extends Message> extends BaseOperation implements Fun
     this(messageClass, new Fields(fieldsToExtract), fieldsToExtract);
   }
 
+
   /**
    * Expand only the fields listed in fieldsToExtract, naming them with the corresponding field
    * names in fieldDeclaration.
    */
   public ExpandProto(Class<T> messageClass, Fields fieldDeclaration, String... fieldsToExtract) {
+    this(messageClass, fieldDeclaration, ExtensionSupport.NONE, fieldsToExtract);
+  }
+
+  /**
+   * Expand only the fields listed in fieldsToExtract, naming them with the corresponding field
+   * names in fieldDeclaration.
+   */
+  public ExpandProto(Class<T> messageClass, Fields fieldDeclaration, ExtensionSupport extensionSupport, String... fieldNamesToExtract) {
     super(1, fieldDeclaration);
-    if (fieldDeclaration.size() != fieldsToExtract.length) {
+    this.messageClassName = messageClass.getName();
+    this.selectedFields = new SelectedFields(messageClass.getName(), extensionSupport, fieldNamesToExtract);
+
+    if (fieldDeclaration.size() != fieldNamesToExtract.length) {
       throw new IllegalArgumentException("Fields "
           + fieldDeclaration
           + " doesn't have enough field names to identify all "
-          + fieldsToExtract.length
+          + fieldNamesToExtract.length
           + " fields in "
           + messageClass.getName());
     }
 
-    Message.Builder builder = Util.builderFromMessageClass(messageClass.getName());
-
-    for (int i = 0; i < fieldsToExtract.length; i++) {
-      Descriptors.FieldDescriptor field = builder.getDescriptorForType().findFieldByName(fieldsToExtract[i]);
+    for (int i = 0; i < fieldNamesToExtract.length; i++) {
+      Descriptors.FieldDescriptor field = selectedFields.findByName(fieldNamesToExtract[i]);
       if (field == null) {
         throw new IllegalArgumentException("Could not find a field named '"
-            + fieldsToExtract[i]
+            + fieldNamesToExtract[i]
             + "' in message class "
             + messageClass.getName());
       } else if (field.isRepeated()) {
-        throw new IllegalArgumentException("field "  + fieldsToExtract[i]
+        throw new IllegalArgumentException("field "  + fieldNamesToExtract[i]
             + " is repeated. Please use ExpandRepeatedProto instead.");
       }
     }
-
-    this.fieldsToExtract = fieldsToExtract;
-    this.messageClassName = messageClass.getName();
   }
 
   @Override public void operate(FlowProcess flowProcess, FunctionCall functionCall) {
+
     T arg = (T) functionCall.getArguments().getObject(0);
     if (!arg.getClass().getName().equals(messageClassName)) {
-      throw new IllegalArgumentException("Expected argument of type " + messageClassName + ", found " + arg.getClass().getName());
+      throw new IllegalArgumentException(
+          "Expected argument of type " + messageClassName + ", found " + arg.getClass().getName());
     }
     Tuple result = new Tuple();
 
-    fieldDescriptorsToExtract = getFieldDescriptorsToExtract(fieldDescriptorsToExtract, messageClassName, fieldsToExtract);
-    for (Descriptors.FieldDescriptor fieldDescriptor : fieldDescriptorsToExtract) {
+    for (Descriptors.FieldDescriptor fieldDescriptor : selectedFields.get()) {
       Object fieldValue = null;
       if (arg.hasField(fieldDescriptor)) {
         fieldValue = arg.getField(fieldDescriptor);
