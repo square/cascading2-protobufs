@@ -17,7 +17,7 @@ import java.util.Set;
 
 /**
  * Emit a new tuple for every element of a specified repeated field of an input proto. Note that this function will
- * effectively filter input tuples whose repeated field is empty. 
+ * effectively filter input tuples whose repeated field is empty.
  * @param <T>
  */
 public class ExpandRepeatedProto<T extends Message> extends AbstractExpandProto<T> {
