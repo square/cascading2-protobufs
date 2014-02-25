@@ -67,7 +67,6 @@ public class ExpandProto<T extends Message> extends AbstractExpandProto<T> {
             + " is repeated. Please use ExpandRepeatedProto instead.");
       }
     }
-
   }
 
   @Override public void operate(FlowProcess flowProcess, FunctionCall functionCall) {

@@ -56,6 +56,7 @@ public abstract class AbstractExpandProto<T extends Message> extends BaseOperati
 
       fieldDescriptorsToExtract = fieldDescriptors.toArray(new Descriptors.FieldDescriptor[fieldDescriptors.size()]);
     }
+
     return fieldDescriptorsToExtract;
   }
 
