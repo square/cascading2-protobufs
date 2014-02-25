@@ -14,12 +14,14 @@ import cascading.tuple.TupleEntry;
 import cascading.tuple.TupleEntryCollector;
 import com.squareup.cascading2.generated.Example;
 import com.squareup.cascading2.scheme.ProtobufScheme;
-import java.io.IOException;
-import java.util.concurrent.atomic.AtomicReference;
 import junit.framework.TestCase;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class ExtractProtoTest extends TestCase {
   private static final Example.Partnership P1 = Example.Partnership.newBuilder()
@@ -115,6 +117,11 @@ public class ExtractProtoTest extends TestCase {
         .addTail(p);
 
     new HadoopFlowConnector().connect(flowDef).complete();
+  }
+
+  public void testGetEmittedClasses() throws Exception {
+    assertEquals(Collections.singleton(Example.Person.class),
+            new ExtractProto(Example.Partnership.class, "leader").getEmittedClasses());
   }
 
   private static Tuple exec(Function f, final Tuple input) {

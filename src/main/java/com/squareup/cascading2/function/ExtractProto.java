@@ -10,8 +10,12 @@ import cascading.tuple.Tuple;
 import com.google.protobuf.Descriptors;
 import com.google.protobuf.Message;
 import com.squareup.cascading2.util.Util;
+import com.squareup.cascading_helpers.operation.KnowsEmittedClasses;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Extract one of more fields from a nested Protobuf object. The fields to extract are specified in
@@ -20,7 +24,7 @@ import java.util.List;
  *
  * Repeated fields are NOT supported with this function.
  */
-public class ExtractProto extends BaseOperation implements Function {
+public class ExtractProto extends BaseOperation implements Function, KnowsEmittedClasses {
   private final String messageClassName;
   private transient List<List<Descriptors.FieldDescriptor>> paths;
   private final String[] stringPaths;
@@ -154,5 +158,26 @@ public class ExtractProto extends BaseOperation implements Function {
 
     // yield the final tuple
     functionCall.getOutputCollector().add(t);
+  }
+
+  @Override
+  public Set<Class> getEmittedClasses() {
+    // load the memoized descriptor list
+    prepare(null, null);
+
+    Message defaultInstance = Util.builderFromMessageClass(messageClassName).build();
+    Set<Class> results = new HashSet<Class>();
+    for(List<Descriptors.FieldDescriptor> path : paths) {
+      Descriptors.FieldDescriptor last = path.get(path.size() - 1);
+      if (last.getJavaType() == Descriptors.FieldDescriptor.JavaType.MESSAGE) {
+        Message cur = defaultInstance;
+        for (Descriptors.FieldDescriptor pathElement : path) {
+          cur = (Message) cur.getField(pathElement);
+        }
+        results.add(cur.getClass());
+      }
+    }
+
+    return results;
   }
 }
