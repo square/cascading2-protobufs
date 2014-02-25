@@ -17,6 +17,7 @@ import com.squareup.cascading2.generated.Example;
 import com.squareup.cascading2.scheme.ProtobufScheme;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import junit.framework.TestCase;
 import org.apache.hadoop.conf.Configuration;
@@ -41,7 +42,7 @@ public class TestExpandProto extends TestCase {
       Example.Person.newBuilder().setName("harry").setId(3);
 
   public void testSimple() throws Exception {
-    ExpandProto allFields = new ExpandProto(Example.Person.class);
+    AbstractExpandProto allFields = new ExpandProto(Example.Person.class);
     List<Tuple> results =
         operateFunction(allFields, new TupleEntry(new Fields("value"), new Tuple(BRYAN.build())));
     Tuple result = results.get(0);
@@ -54,7 +55,7 @@ public class TestExpandProto extends TestCase {
   }
 
   public void testNested() throws Exception {
-    ExpandProto allFields = new ExpandProto(Example.Partnership.class, "leader", "follower");
+    AbstractExpandProto allFields = new ExpandProto(Example.Partnership.class, "leader", "follower");
     List<Tuple> results = operateFunction(allFields, new TupleEntry(new Fields("value"), new Tuple(
         Example.Partnership
             .newBuilder()
@@ -75,6 +76,7 @@ public class TestExpandProto extends TestCase {
   public void testRepeated() throws Exception {
     try {
       new ExpandProto(Example.Partnership.class, "silent");
+      fail("this should have thrown an exception!");
     } catch(IllegalArgumentException e) {
       // ok
     }
@@ -111,7 +113,7 @@ public class TestExpandProto extends TestCase {
   }
 
   public void testWrongArgumentClass() throws Exception {
-    ExpandProto func = new ExpandProto(Example.Person.class, "name");
+    AbstractExpandProto func = new ExpandProto(Example.Person.class, "name");
     try {
       func.operate(new HadoopFlowProcess(), new FunctionCall() {
         @Override public TupleEntry getArguments() {
@@ -170,6 +172,11 @@ public class TestExpandProto extends TestCase {
 
     assertEquals(new Tuple(0, 1, "bryan", "bryan@mail.com", Example.Person.Position.CEO.getNumber()).toString(), results.get(0).toString());
     assertEquals(new Tuple(25, 2, "lucas", null, null).toString(), results.get(1).toString());
+  }
+
+  public void testGetEmittedClasses() throws Exception {
+    AbstractExpandProto<Example.Partnership> func = new ExpandProto<Example.Partnership>(Example.Partnership.class, "leader");
+    assertEquals(Collections.singleton(Example.Person.class), func.getEmittedClasses());
   }
 
   protected static List<Tuple> operateFunction(Function func, final TupleEntry argument) {
