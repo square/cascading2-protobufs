@@ -27,22 +27,13 @@ public abstract class AbstractExpandProto<T extends Message> extends BaseOperati
   }
 
   protected static <T extends Message> String[] getAllFields(Class<T> messageClass) {
-    try {
-      Method m = messageClass.getMethod("newBuilder");
-      Message.Builder builder = (Message.Builder) m.invoke(new Object[]{});
+    Message.Builder builder = Util.builderFromMessageClass(messageClass.getName());
 
-      List<String> fieldNames = new ArrayList<String>();
-      for (Descriptors.FieldDescriptor fieldDesc : builder.getDescriptorForType().getFields()) {
-        fieldNames.add(fieldDesc.getName());
-      }
-      return fieldNames.toArray(new String[fieldNames.size()]);
-    } catch (IllegalAccessException e) {
-      throw new RuntimeException(e);
-    } catch (NoSuchMethodException e) {
-      throw new RuntimeException(e);
-    } catch (InvocationTargetException e) {
-      throw new RuntimeException(e);
+    List<String> fieldNames = new ArrayList<String>();
+    for (Descriptors.FieldDescriptor fieldDesc : builder.getDescriptorForType().getFields()) {
+      fieldNames.add(fieldDesc.getName());
     }
+    return fieldNames.toArray(new String[fieldNames.size()]);
   }
 
   protected Descriptors.FieldDescriptor[] getFieldDescriptorsToExtract() {
@@ -50,8 +41,8 @@ public abstract class AbstractExpandProto<T extends Message> extends BaseOperati
       Message.Builder builder = Util.builderFromMessageClass(messageClassName);
 
       List <Descriptors.FieldDescriptor> fieldDescriptors = new ArrayList<Descriptors.FieldDescriptor>();
-      for (int i = 0; i < fieldsToExtract.length; i++) {
-        fieldDescriptors.add(builder.getDescriptorForType().findFieldByName(fieldsToExtract[i]));
+      for (String fieldName : fieldsToExtract) {
+        fieldDescriptors.add(builder.getDescriptorForType().findFieldByName(fieldName));
       }
 
       fieldDescriptorsToExtract = fieldDescriptors.toArray(new Descriptors.FieldDescriptor[fieldDescriptors.size()]);
