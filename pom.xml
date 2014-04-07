@@ -24,7 +24,7 @@
     </parent>
     <groupId>com.squareup</groupId>
     <artifactId>cascading2-protobuf</artifactId>
-    <version>0.9</version>
+    <version>0.10</version>
     <packaging>jar</packaging>
 
     <name>cascading2-protobuf</name>
@@ -63,7 +63,7 @@
       <dependency>
         <groupId>com.squareup</groupId>
         <artifactId>cascading-helpers</artifactId>
-        <version>0.14-SNAPSHOT</version>
+        <version>0.18</version>
       </dependency>
       <dependency>
         <groupId>cascading</groupId>
