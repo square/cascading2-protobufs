@@ -16,11 +16,13 @@ public class DecodeByteStringTest extends TestCase {
         new DecodeByteString("blah"),
         new Fields("blah"),
         new Tuple(ByteString.copyFromUtf8("1337")),
-        new Tuple(ByteString.copyFromUtf8("brian")));
+        new Tuple(ByteString.copyFromUtf8("brian")),
+        new Tuple((ByteString)null));
 
     assertEquals(Arrays.asList(
         new Tuple("1337"),
-        new Tuple("brian")),
+        new Tuple("brian"),
+        new Tuple((Object)null)),
         results);
   }
 
@@ -30,11 +32,13 @@ public class DecodeByteStringTest extends TestCase {
         new DecodeByteString("ISO-8859-1", "blah"),
         new Fields("blah"),
         new Tuple(ByteString.copyFromUtf8("1337")),
-        new Tuple(ByteString.copyFromUtf8("brian")));
+        new Tuple(ByteString.copyFromUtf8("brian")),
+        new Tuple((ByteString)null));
 
     assertEquals(Arrays.asList(
         new Tuple("1337"),
-        new Tuple("brian")),
+        new Tuple("brian"),
+        new Tuple((Object)null)),
         results);
   }
 
