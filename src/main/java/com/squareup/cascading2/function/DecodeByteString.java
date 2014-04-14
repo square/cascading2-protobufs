@@ -27,7 +27,8 @@ public class DecodeByteString extends BaseOperation implements Function {
 
   @Override public void operate(FlowProcess flowProcess, FunctionCall functionCall) {
     try {
-      functionCall.getOutputCollector().add(new Tuple(((ByteString) functionCall.getArguments().getObject(0)).toString(encoding)));
+      ByteString arg = (ByteString) functionCall.getArguments().getObject(0);
+      functionCall.getOutputCollector().add(new Tuple(arg == null ? null : arg.toString(encoding)));
     } catch (UnsupportedEncodingException e) {
       throw new RuntimeException("Unsupported encoding exception: ", e);
     }
