@@ -40,9 +40,9 @@
     </properties>
 
     <scm>
-        <url>https://github.com/square/cascading2-protobuf</url>
-        <connection>scm:git:https://github.com/square/cascading2-protobuf</connection>
-        <developerConnection>scm:git:git@github.com:square/cascading2-protobuf.git</developerConnection>
+        <url>https://github.com/square/cascading2-protobufs</url>
+        <connection>scm:git:https://github.com/square/cascading2-protobufs</connection>
+        <developerConnection>scm:git:git@github.com:square/cascading2-protobufs.git</developerConnection>
     </scm>
 
     <licenses>
